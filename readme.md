@@ -6,7 +6,10 @@
 
 ## 📖 Introduction
 
-ECE RDV Médical est un projet Java pour la gestion des rendez-vous médicaux. Il permet aux utilisateurs (patients et employés) de naviguer et de gérer des rendez-vous avec des spécialistes de santé. Ce système aide également les gestionnaires de soins de santé à conserver des enregistrements pour les réservations et les clients.
+ECE RDV Médical est un projet Java pour la gestion des rendez-vous médicaux. 
+Il permet aux utilisateurs (patients et employés) de naviguer et de gérer des rendez-vous avec des spécialistes de 
+santé. Ce système aide également les gestionnaires de soins de santé à conserver des enregistrements pour les 
+réservations et les clients.
 
 ## 📚 Table of Contents
 
@@ -22,7 +25,8 @@ ECE RDV Médical est un projet Java pour la gestion des rendez-vous médicaux. I
 
 - **Gestion des Rendez-vous** : Permet aux patients de réserver des rendez-vous avec des médecins spécialistes.
 - **Interface Graphique Utilisateur (GUI)** : Interface claire et intuitive pour les clients et les employés.
-- **Gestion des Utilisateurs** : Nouveaux patients peuvent s'inscrire et les anciens utilisateurs peuvent utiliser leurs connexions existantes.
+- **Gestion des Utilisateurs** : Nouveaux patients peuvent s'inscrire et les anciens utilisateurs peuvent utiliser 
+leurs connexions existantes.
 - **Base de Données** : Conserve les enregistrements de réservations et les détails des clients.
 - **Reporting** : Génère des rapports statistiques sur les rendez-vous et les opérations.
 
@@ -36,9 +40,11 @@ Pour commencer avec le projet ECE RDV Médical, suivez ces étapes :
 
 2. Assurez-vous que Java JDK est installé et correctement configuré sur votre machine.
 
-3. Importez les dépendances nécessaires à votre projet, par exemple, MySQL Connector pour la gestion de la base de données et JFreeChart pour la génération de rapports sous forme de graphiques.
+3. Importez les dépendances nécessaires à votre projet, par exemple, MySQL Connector pour la gestion de la base de 
+données et JFreeChart pour la génération de rapports sous forme de graphiques.
 
-4. Configurez la connexion à la base de données en modifiant le fichier de configuration avec vos propres paramètres de connexion.
+4. Configurez la connexion à la base de données en modifiant le fichier de 
+configuration avec vos propres paramètres de connexion.
 
 # 🚀 Usage
 
@@ -46,13 +52,15 @@ Pour lancer l'application ECE RDV Médical, procédez comme suit :
 
 1. Lancez votre serveur MySQL et créez la base de données en exécutant le script SQL fourni avec le projet.
 
-2. Ouvrez le projet dans votre IDE et exécutez-le. Si un fichier exécutable `.jar` est fourni, vous pouvez également exécuter l'application en utilisant la commande :
+2. Ouvrez le projet dans votre IDE et exécutez-le. Si un fichier exécutable `.jar` est fourni, vous pouvez 
+également exécuter l'application en utilisant la commande :
    ```sh
    java -jar ECE-RDV-Medical.jar
 
 # 😃 Gitmoji Guide
 
-Incorporating gitmojis into your commit messages can make them more engaging and easier to understand at a glance. Here's a quick guide to using emojis in your commits:
+Incorporating gitmojis into your commit messages can make them more engaging 
+and easier to understand at a glance. Here's a quick guide to using emojis in your commits:
 
 - 🎉 `:tada:` for initial commits.
 - ✨ `:sparkles:` when introducing new features.
@@ -73,17 +81,28 @@ This approach helps to visually categorize commit types, making your project's h
 
 For a comprehensive list of gitmojis and their meanings, visit [Gitmoji](https://gitmoji.dev).
 
-# 🤝 Contributing
-Les contributions sont ce qui rend la communauté open source un endroit incroyable pour apprendre, s'inspirer et créer. Toutes les contributions que vous faites sont grandement appréciées.
-1. Forkez le projet
+# 👨‍💻 Contributing
 
-2. Verifiez le nom des dernieres branches
+1. Verifiez le nom des dernieres branches
 
-3. Créez votre branche de fonctionnalité (git checkout -b doc-n)
+2. Apartir de la branche Main, Créez votre branche de fonctionnalité 
+```sh
+git checkout -b doc-n
+ ```
 
-4. Committez vos changements (git commit -m ':emoji: Feature implemented')
+3. Committez vos changements 
+```sh
+git commit -m ':emoji: Feature implemented'
+```
 
-5. Push vers la branche (git push origin doc-n)
+4. Push vers la branche 
+```sh
+git push origin doc-n
+```
 
-6. Ouvrez une Pull Request
+5. Ouvrez une Pull Request, depuis [github](https://github.com/ethansmadjaa/DoctoLibECE.git)
 
+# ✍️ Auteurs du projet
+### [Ethan SMADJA](mailto:Ethan.smadja@edu.ece.fr)
+### [Pierre LOUIS](mailto:pierre.louis@edu.ece.fr)
+### [Tenzin CHOEPHEL TSERING](tenzin.choepheltsering@edu.ece.fr)
