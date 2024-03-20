@@ -105,4 +105,4 @@ git push origin doc-n
 # ✍️ Auteurs du projet
 ### [Ethan SMADJA](mailto:Ethan.smadja@edu.ece.fr)
 ### [Pierre LOUIS](mailto:pierre.louis@edu.ece.fr)
-### [Tenzin CHOEPHEL TSERING](tenzin.choepheltsering@edu.ece.fr)
+### [Tenzin CHOEPHEL TSERING](mailto:tenzin.choepheltsering@edu.ece.fr)
