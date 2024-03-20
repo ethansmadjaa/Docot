@@ -85,7 +85,7 @@ For a comprehensive list of gitmojis and their meanings, visit [Gitmoji](https:/
 
 1. Verifiez le nom des dernieres branches
 
-2. Apartir de la branche Main, Créez votre branche de fonctionnalité 
+2. Apartir de la branche doc-1, Créez votre branche de fonctionnalité 
 ```sh
 git checkout -b doc-n
  ```
@@ -97,7 +97,7 @@ git commit -m ':emoji: Feature implemented'
 
 4. Push vers la branche 
 ```sh
-git push origin doc-n
+git push doc-1 doc-n
 ```
 
 5. Ouvrez une Pull Request, depuis [github](https://github.com/ethansmadjaa/DoctoLibECE.git)
