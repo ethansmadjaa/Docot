@@ -17,8 +17,9 @@ réservations et les clients.
 - [Features](#-features)
 - [Installation](#-installation)
 - [Usage](#-usage)
-- [Gitmoji guide](#-gitmoji-guide)
 - [Contributing](#-contributing)
+- [Gitmoji guide](#-gitmoji-guide)
+
 
 
 # ✨ Features
@@ -57,6 +58,28 @@ Pour lancer l'application ECE RDV Médical, procédez comme suit :
    ```sh
    java -jar ECE-RDV-Medical.jar
 
+# 👨‍💻 Contributing
+
+1. Verifiez le nom des dernieres branches
+
+2. Apartir de la branche doc-1, Créez votre branche de fonctionnalité 
+```sh
+git checkout -b doc-n
+ ```
+
+3. Committez vos changements 
+```sh
+git commit -m ':emoji: Feature implemented'
+```
+
+4. Push vers la branche 
+```sh
+git push doc-1 doc-n
+```
+
+5. Ouvrez une Pull Request, depuis [github](https://github.com/ethansmadjaa/DoctoLibECE.git)
+
+
 # 😃 Gitmoji Guide
 
 Incorporating gitmojis into your commit messages can make them more engaging 
@@ -81,26 +104,6 @@ This approach helps to visually categorize commit types, making your project's h
 
 For a comprehensive list of gitmojis and their meanings, visit [Gitmoji](https://gitmoji.dev).
 
-# 👨‍💻 Contributing
-
-1. Verifiez le nom des dernieres branches
-
-2. Apartir de la branche doc-1, Créez votre branche de fonctionnalité 
-```sh
-git checkout -b doc-n
- ```
-
-3. Committez vos changements 
-```sh
-git commit -m ':emoji: Feature implemented'
-```
-
-4. Push vers la branche 
-```sh
-git push doc-1 doc-n
-```
-
-5. Ouvrez une Pull Request, depuis [github](https://github.com/ethansmadjaa/DoctoLibECE.git)
 
 # ✍️ Auteurs du projet
 ### [Ethan SMADJA](mailto:Ethan.smadja@edu.ece.fr)
