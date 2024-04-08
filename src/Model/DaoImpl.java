@@ -27,7 +27,7 @@ public class DaoImpl implements Dao {
 
         // creation of a JDBC connection
         conn = DriverManager.getConnection(
-                "http://localhost/phpMyAdmin5/index.php?route=/database/structure&db=Doctolib",
+                "jdbc:mysql://127.0.0.1:3306/Doctolib",
                 "docteurECE",
                 "Docteur");
 
