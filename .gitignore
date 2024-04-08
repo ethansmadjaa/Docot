@@ -1,8 +1,8 @@
 .idea/modules.xml
 .idea/vcs.xml
 .idea/.gitignore
-
 /.idea/DoctoLibECE.iml
 /.idea/misc.xml
 /out/
+/.idea/libraries/mysql_connector_java.xml
 /DoctoLibECE.iml
