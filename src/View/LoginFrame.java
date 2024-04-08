@@ -5,7 +5,7 @@ import javax.swing.*;
 public class LoginFrame extends JFrame {
     public LoginFrame() {
         setTitle("Login");
-        setSize(300, 200);
+        setSize(1200, 800);
         setLocationRelativeTo(null);  // Center the frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -16,7 +16,4 @@ public class LoginFrame extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginFrame::new);
-    }
 }

@@ -18,22 +18,35 @@ public class LoginPanel extends JPanel {
     public LoginPanel() {
         controllerLogin = new ControllerLogin();
 
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridBagLayout());
+
+        GridBagConstraints c = new GridBagConstraints();
 
         // Create and add username label and field
-        add(new JLabel("Username:"));
+        c.gridx = 0;
+        c.gridy = 0;
+        add(new JLabel("Username:"), c);
+
+        c.gridx = 1;
         usernameField = new JTextField(20);
-        add(usernameField);
+        add(usernameField, c);
 
         // Create and add password label and field
-        add(new JLabel("Password:"));
+        c.gridx = 0;
+        c.gridy = 1;
+        add(new JLabel("Password:"), c);
+
+        c.gridx = 1;
         passwordField = new JPasswordField(20);
-        add(passwordField);
+        add(passwordField, c);
 
         // Create and add login button
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 2;
         loginButton = new JButton("Login");
         loginButton.addActionListener(new LoginAction());
-        add(loginButton);
+        add(loginButton, c);
     }
 
     private class LoginAction implements ActionListener {
