@@ -19,18 +19,22 @@ public class DaoImpl implements Dao {
     public DaoImpl() {
 
     }
-
     @Override
     public void connect() throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        //création d'une connexion JDBC à la base
-        conn = DriverManager.getConnection("Doctolib", "docteurECE", "Docteur");
 
-        // création d'un ordre SQL (statement)
+        // creation of a JDBC connection
+        conn = DriverManager.getConnection(
+                "http://localhost/phpMyAdmin5/index.php?route=/database/structure&db=Doctolib",
+                "docteurECE",
+                "Docteur");
+
+        // creation of a Statement
         stmt = conn.createStatement();
     }
+
 
     @Override
     public void disconnect() throws SQLException {
