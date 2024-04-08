@@ -6,13 +6,11 @@ import java.awt.event.*;
 
 public class MainMenu {
 
-
     public MainMenu(JFrame frame) {
-
         frame.getContentPane().removeAll();
-
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+        frame.setSize(1200, 800);
 
         // Create and add title
         JLabel title = new JLabel("Doctolib");
@@ -25,34 +23,38 @@ public class MainMenu {
         c.anchor = GridBagConstraints.CENTER;
         frame.add(title, c);
 
-        JButton button1 = new JButton("Button 1");
-        button1.setBounds(50, 100, 117, 29);
-        button1.addActionListener(new ActionListener() {
+        frame.setLayout(new BorderLayout(10, 10));
+
+        // Panel for form inputs
+        JPanel formPanel = new JPanel(new GridLayout(3, 2, 5, 5));
+        formPanel.add(new JLabel("Doctor's Name:"));
+        JTextField doctorNameField = new JTextField();
+        formPanel.add(doctorNameField);
+
+        JButton searchButton = new JButton("Search");
+        formPanel.add(searchButton);
+
+        // Add formPanel to the north of the BorderLayout
+        frame.add(formPanel, BorderLayout.NORTH);
+
+        // Results area
+        JTextArea resultsArea = new JTextArea(10, 30);
+        resultsArea.setEditable(false);
+        frame.add(new JScrollPane(resultsArea), BorderLayout.CENTER);
+
+        // Action listener for the search button
+        searchButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                function1();
+                performSearch();
             }
         });
-        frame.getContentPane().add(button1);
 
-        JButton button2 = new JButton("Button 2");
-        button2.setBounds(200, 100, 120, 30);
-        button2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                function2();
-            }
-        });
-        frame.getContentPane().add(button2);
-
+        frame.setLocationRelativeTo(null); // Center frame on screen
         frame.setVisible(true);
     }
 
-    private void function1() {
-        System.out.println("Button 1 pressed");
-        // Your code for functionality of button 1
-    }
+    private void performSearch() {}
 
-    private void function2() {
-        System.out.println("Button 2 pressed");
-        // Your code for functionality of button 2
-    }
+
 }
