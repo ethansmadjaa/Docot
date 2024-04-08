@@ -12,11 +12,15 @@ public class LoginPanel extends JPanel {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JFrame frame;
 
     private ControllerLogin controllerLogin;
 
-    public LoginPanel() {
+    public LoginPanel(JFrame frame) {
+        System.out.println("Filling Login Frame");
         controllerLogin = new ControllerLogin();
+
+        this.frame = frame;
 
         setLayout(new GridBagLayout());
 
@@ -56,7 +60,13 @@ public class LoginPanel extends JPanel {
             String password = new String(passwordField.getPassword());
 
             try {
-                controllerLogin.login(username, password);
+                if (controllerLogin.login(username, password)) {
+                    frame.getContentPane().removeAll();
+                    frame.revalidate();
+                    frame.repaint();
+                    MainMenu window = new MainMenu(frame);
+                };
+
             } catch (SQLException | ClassNotFoundException sqlException) {
                 sqlException.printStackTrace();
             }

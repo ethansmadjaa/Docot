@@ -26,7 +26,7 @@ public class Login extends DaoImpl{
                 disconnect();
                 return false;
             }
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             System.out.println("Database access error:");
             e.printStackTrace();
             throw e;

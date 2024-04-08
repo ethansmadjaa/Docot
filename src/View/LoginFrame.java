@@ -2,18 +2,22 @@ package View;
 
 import javax.swing.*;
 
-public class LoginFrame extends JFrame {
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+public class LoginFrame{
     public LoginFrame() {
-        setTitle("Login");
-        setSize(1200, 800);
-        setLocationRelativeTo(null);  // Center the frame
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
+        System.out.println("Creating Login Frame");
+        frame.setTitle("Login");
+        frame.setSize(1200, 800);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Create and set the LoginPanel as the content pane
-        LoginPanel loginPanel = new LoginPanel();
-        setContentPane(loginPanel);
+        // Create and set the LoginPanel as the content panel
+        LoginPanel loginPanel = new LoginPanel(frame);
+        frame.setContentPane(loginPanel);
 
-        setVisible(true);
+        frame.setVisible(true);
     }
 
 }
