@@ -1,7 +1,6 @@
 package View;
 
 import Controller.ControllerLogin;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,34 +22,59 @@ public class LoginPanel extends JPanel {
         this.frame = frame;
 
         setLayout(new GridBagLayout());
-
         GridBagConstraints c = new GridBagConstraints();
 
-        // Create and add username label and field
+        // Create and add title
+        JLabel title = new JLabel("Doctolib");
+        title.setFont(new Font("Century Gothic", Font.BOLD, 48));
+        title.setForeground(Color.BLUE);
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(20, 0, 20, 0);
+        c.anchor = GridBagConstraints.CENTER;
+        add(title, c);
+
+        // Reset c.gridwidth to 1 for subsequent components
+        c.gridwidth = 1;
+
+        // Improve component alignment and spacing
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(10, 10, 10, 10);
+
+        // Create and add username label
+        c.gridx = 0;
+        c.gridy = 1;
         add(new JLabel("Username:"), c);
 
+        // Create and add username field
         c.gridx = 1;
+        c.gridy = 1;
         usernameField = new JTextField(20);
         add(usernameField, c);
 
-        // Create and add password label and field
+        // Reset X position for next component
         c.gridx = 0;
-        c.gridy = 1;
+
+        // Create and add password label
+        c.gridy = 2;
         add(new JLabel("Password:"), c);
 
+        // Create and add password field
         c.gridx = 1;
         passwordField = new JPasswordField(20);
         add(passwordField, c);
 
         // Create and add login button
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = 2;
+        c.fill = GridBagConstraints.NONE;
+        c.anchor = GridBagConstraints.CENTER;
         loginButton = new JButton("Login");
         loginButton.addActionListener(new LoginAction());
         add(loginButton, c);
+
     }
 
     private class LoginAction implements ActionListener {
