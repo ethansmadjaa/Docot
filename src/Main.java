@@ -1,6 +1,12 @@
+import Model.Login;
+import View.LoginFrame;
+
+import javax.swing.*;
+
 public class Main {
 
     public static void main(String[] args){
-        System.out.println("Hello World!");
+        LoginFrame loginFrame = new LoginFrame();
+        SwingUtilities.invokeLater(LoginFrame::new);
     }
 }
