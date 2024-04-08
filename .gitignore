@@ -1,4 +1,7 @@
 .idea/modules.xml
 .idea/vcs.xml
 .idea/.gitignore
-out
+
+/.idea/DoctoLibECE.iml
+/.idea/misc.xml
+/out/
