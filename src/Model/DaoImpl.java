@@ -33,6 +33,8 @@ public class DaoImpl implements Dao {
 
         // creation of a Statement
         stmt = conn.createStatement();
+
+        System.out.println("Connected to database");
     }
 
 
