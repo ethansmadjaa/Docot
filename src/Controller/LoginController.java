@@ -4,7 +4,7 @@ import Model.Login;
 
 import java.sql.SQLException;
 
-public class ControllerLogin {
+public class LoginController {
     public boolean login(String username, String password) throws SQLException, ClassNotFoundException {
         System.out.println("Logging in with username: " + username + " and password: " + password);
         Login login = new Login();

@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ControllerLogin;
+import Controller.LoginController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +13,11 @@ public class LoginPanel extends JPanel {
     private JButton loginButton;
     private JFrame frame;
 
-    private ControllerLogin controllerLogin;
+    private LoginController controllerLogin;
 
     public LoginPanel(JFrame frame) {
         System.out.println("Filling Login Frame");
-        controllerLogin = new ControllerLogin();
+        controllerLogin = new LoginController();
 
         this.frame = frame;
 
