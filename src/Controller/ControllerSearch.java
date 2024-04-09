@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Docteur;
 import Model.Search;
 
 import java.sql.SQLException;
@@ -13,12 +14,10 @@ public class ControllerSearch {
 
         List<Integer> results = new ArrayList<>();
 
-        results = search.search(content);
-
-        for (Integer result : results) {
-
+        results = search.searchResults(content);
+        if (results.size() > 0) {
+            ArrayList<Docteur> docteurs = search.searchDocteur(results);
         }
-
 
     }
 }
