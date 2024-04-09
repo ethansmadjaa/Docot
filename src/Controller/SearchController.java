@@ -9,13 +9,9 @@ import java.util.List;
 
 public class SearchController {
 
-    private final Search search;
-
-    public SearchController() {
-        this.search = new Search();
-    }
-
     public ArrayList<Docteur> getSearchResults(String content) throws SQLException, ClassNotFoundException {
+
+        Search search = new Search();
 
         List<Integer> results = search.searchResults(content);
 
