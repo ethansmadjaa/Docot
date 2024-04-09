@@ -15,6 +15,8 @@ public class MainMenu {
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
+
+
         // Title
         JLabel title = new JLabel("Doctolib", SwingConstants.CENTER);
         title.setFont(new Font("Century Gothic", Font.BOLD, 48));
