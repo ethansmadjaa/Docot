@@ -32,7 +32,7 @@ public class Search extends DaoImpl {
             rset = pstmt.executeQuery();
 
             while (rset.next()) {
-                results.add(rset.getInt("docID"));
+                results.add(rset.getInt("MedecinID"));
             }
 
             if (results.isEmpty()) {
@@ -70,6 +70,7 @@ public class Search extends DaoImpl {
                 rset = pstmt.executeQuery();
                 if (rset.next()) {
                     docteur = new Docteur(
+                            id,
                             rset.getString("nom"),
                             rset.getString("prenom"),
                             rset.getString("specialite"),

@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Docteur;
+import Model.RdvModel;
+import Model.RendezVous;
 import Model.Search;
 
 import java.sql.SQLException;
@@ -19,6 +21,21 @@ public class SearchController {
             return null;
         } else {
             return search.searchDocteur(results);
+        }
+    }
+
+    public ArrayList<RendezVous> getRendezVous(int id)  throws SQLException, ClassNotFoundException{
+
+        RdvModel rdv = new RdvModel();
+
+        ArrayList<RendezVous> rendezVous = new ArrayList<>();
+
+        rendezVous = rdv.searchRendezVous(id);
+
+        if (rendezVous.isEmpty()) {
+            return null;
+        }else{
+            return rendezVous;
         }
     }
 }
