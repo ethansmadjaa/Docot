@@ -13,7 +13,8 @@ CREATE TABLE Medecins (
       Prenom VARCHAR(255),
       Specialite VARCHAR(255),
       Email VARCHAR(255),
-      Motdepasse VARCHAR(255)
+      Motdepasse VARCHAR(255),
+    Lieu VARCHAR(255)
 );
 
 
@@ -26,5 +27,3 @@ CREATE TABLE RendezVous (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
     FOREIGN KEY (MedecinID) REFERENCES Medecins(MedecinID)
 );
-
-
