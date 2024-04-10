@@ -5,7 +5,7 @@ import Model.Docteur;
 import javax.swing.*;
 import java.awt.*;
 
-public class Results {
+public class ViewResults {
 
         public static void viewResults(JScrollPane scrollPane, Docteur docteur){
             JPanel panel = new JPanel(new BorderLayout());
