@@ -4,34 +4,47 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Login extends DaoImpl{
-
-    public boolean CheckCredentials(String username, String password) throws SQLException, ClassNotFoundException {
-
+public class Login extends DaoImpl {
+    public int checkCredentials(String username, String password) throws SQLException, ClassNotFoundException {
         connect();
 
-        String sqlInsert = "SELECT * FROM User WHERE username = ? AND password = ?";
+        // Verify Medecins credentials
+        if (verifyUserCredentials(username, password, "Medecins")) {
+            disconnect();
+            return 2;
+        }
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
+        // Verify Patients credentials
+        if (verifyUserCredentials(username, password, "Patients")) {
+            disconnect();
+            return 1;
+        }
+
+        // Invalid credentials
+        System.out.println("Invalid username or password");
+        disconnect();
+        return 0;
+    }
+
+    private boolean verifyUserCredentials(String username, String password, String tableName) throws SQLException {
+        String sqlDoc = "SELECT * FROM " + tableName + " WHERE Email = ? AND Motdepasse = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlDoc)) {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-
             ResultSet rset = pstmt.executeQuery();
 
-            // Check if the login exists
             if (rset.next()) {
                 System.out.println("Logged in successfully");
-            } else {
-                System.out.println("Wrong login or password");
-                disconnect();
-                return false;
+                return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Database access error:");
             e.printStackTrace();
             throw e;
         }
-        disconnect();
-        return true;
+
+        // No such user found
+        return false;
     }
 }
