@@ -1,11 +1,39 @@
 package Model;
 
-public class RdvModel{
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class RdvModel extends DaoImpl{
+
+    public ArrayList<RendezVous> searchRendezVous(int id) throws SQLException, ClassNotFoundException {
+        String query = "select * from RendezVous where RendezVousID= ? AND DateEtHeure > NOW()";
+
+        ArrayList<RendezVous> rendezVous = new ArrayList<>();
+
+        connect();
+
+        try(PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, id);
+            rset = pstmt.executeQuery();
+            while (rset.next()) {
+                RendezVous rdv = new RendezVous(
+                        rset.getInt("RendezVousID"),
+                        rset.getInt("PatientID"),
+                        rset.getInt("MedecinID"),
+                        rset.getDate("dateEtHeure"),
+                        rset.getString("status"));
+                rendezVous.add(rdv);
+            }
+        }
+        disconnect();
+        return rendezVous;
+
+
+    }
+
 }
-/**                 Trouver un rdv
-
-SELECT * FROM RendezVous WHERE Status = 'Libre' AND DateEtHeure > NOW() AND MedcinID = ?;
-
+/**
         Mettre a jour le status du rdv en passé
 
  UPDATE RendezVous SET Status = 'Passé' WHERE DateEtHeure < NOW();
