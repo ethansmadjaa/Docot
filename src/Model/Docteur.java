@@ -10,11 +10,14 @@ public class Docteur {
 
     private final String specialite;
 
-    public Docteur(String nom, String prenom, String lieu, String specialite) {
+    private final String email;
+
+    public Docteur(String nom, String prenom,String specialite,  String email, String lieu) {
         this.nom = nom;
         this.prenom = prenom;
-        this.lieu = lieu;
         this.specialite = specialite;
+        this.email = email;
+        this.lieu = lieu;
     }
 
     public String getNom() {
@@ -31,6 +34,10 @@ public class Docteur {
 
     public String getSpecialite(){
         return specialite;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String toString(){
