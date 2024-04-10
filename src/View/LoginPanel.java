@@ -1,6 +1,9 @@
 package View;
 
 import Controller.LoginController;
+import Model.Docteur;
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,12 +11,11 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class LoginPanel extends JPanel {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-    private JFrame frame;
+    private final JTextField emailField;
+    private final JPasswordField passwordField;
+    private final JFrame frame;
 
-    private LoginController controllerLogin;
+    private final LoginController controllerLogin;
 
     public LoginPanel(JFrame frame) {
         System.out.println("Filling Login Frame");
@@ -45,13 +47,13 @@ public class LoginPanel extends JPanel {
         // Create and add username label
         c.gridx = 0;
         c.gridy = 1;
-        add(new JLabel("Username:"), c);
+        add(new JLabel("Email:"), c);
 
         // Create and add username field
         c.gridx = 1;
         c.gridy = 1;
-        usernameField = new JTextField(20);
-        add(usernameField, c);
+        emailField = new JTextField(20);
+        add(emailField, c);
 
         // Reset X position for next component
         c.gridx = 0;
@@ -71,7 +73,7 @@ public class LoginPanel extends JPanel {
         c.gridwidth = 2;
         c.fill = GridBagConstraints.NONE;
         c.anchor = GridBagConstraints.CENTER;
-        loginButton = new JButton("Login");
+        JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new LoginAction());
         add(loginButton, c);
 
@@ -80,16 +82,32 @@ public class LoginPanel extends JPanel {
     private class LoginAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String username = usernameField.getText();
+            String username = emailField.getText();
             String password = new String(passwordField.getPassword());
 
             try {
-                if (controllerLogin.login(username, password)) {
+                if (controllerLogin.login(username, password) == 1) {
+
+                    Patient patient = new Patient(username, password);
+
                     frame.getContentPane().removeAll();
                     frame.revalidate();
                     frame.repaint();
-                    MainMenu window = new MainMenu(frame);
-                };
+                    MainMenuPatient window = new MainMenuPatient(frame, patient);
+                } else if (controllerLogin.login(username, password) == 2) {
+
+                    Docteur docteur = new Docteur(username, password);
+
+                    frame.getContentPane().removeAll();
+                    frame.revalidate();
+                    frame.repaint();
+                    MainMenuDocteur window = new MainMenuDocteur(frame, docteur);
+                } else if (controllerLogin.login(username, password) == 0) {
+                    JOptionPane.showMessageDialog(frame,
+                            "Wrong username or password, Please try again",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
 
             } catch (SQLException | ClassNotFoundException sqlException) {
                 sqlException.printStackTrace();
