@@ -1,6 +1,10 @@
+DROP DATABASE Doctolib;
+
+CREATE DATABASE `Doctolib`;
+
 
 CREATE TABLE Patients (
-      PatientID INT PRIMARY KEY,
+      PatientID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
       Nom VARCHAR(255),
       Prenom VARCHAR(255),
       Email VARCHAR(255),
@@ -8,7 +12,7 @@ CREATE TABLE Patients (
 );
 
 CREATE TABLE Medecins (
-      MedecinID INT PRIMARY KEY,
+      MedecinID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
       Nom VARCHAR(255),
       Prenom VARCHAR(255),
       Specialite VARCHAR(255),
@@ -19,7 +23,7 @@ CREATE TABLE Medecins (
 
 
 CREATE TABLE RendezVous (
-    RendezVousID INT PRIMARY KEY,
+    RendezVousID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     PatientID INT,
     MedecinID INT,
     DateEtHeure DATETIME,
