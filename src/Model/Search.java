@@ -7,10 +7,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Search extends DaoImpl {
+
     private static final String SQL_SEARCH_DOCTEUR =
-            "SELECT docID FROM docteur WHERE nom LIKE ? OR lieu LIKE ? OR specialite LIKE ?";
+            "SELECT MedecinID FROM Medecins WHERE Nom LIKE ? OR Lieu LIKE ? OR specialite LIKE ?";
+
     private static final String SQL_SEARCH_DOCTEUR_BY_ID =
-            "SELECT * FROM docteur WHERE id = ?";
+            "SELECT Nom, Prenom, Specialite, Email, Lieu FROM Medecins WHERE MedecinID = ?";
+
+
     public List<Integer> searchResults(String content) throws SQLException, ClassNotFoundException {
 
         List<Integer> results = new ArrayList<>();
@@ -51,6 +55,8 @@ public class Search extends DaoImpl {
         return results;
     }
 
+
+    //This is used to create Docteur objects after they found it in the results
     public ArrayList<Docteur> searchDocteur(List<Integer> idList) throws SQLException, ClassNotFoundException {
 
         connect();
@@ -67,7 +73,9 @@ public class Search extends DaoImpl {
                             rset.getString("nom"),
                             rset.getString("prenom"),
                             rset.getString("specialite"),
-                            rset.getString("Lieu"));
+                            rset.getString("Email"),
+                            rset.getString("Lieu")
+                            );
                 }
 
             } catch (SQLException e) {
