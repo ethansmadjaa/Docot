@@ -10,14 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class LoginPanel extends JPanel {
+public class Login extends JPanel {
     private final JTextField emailField;
     private final JPasswordField passwordField;
     private final JFrame frame;
 
     private final LoginController controllerLogin;
 
-    public LoginPanel(JFrame frame) {
+    public Login(JFrame frame) {
         System.out.println("Filling Login Frame");
         controllerLogin = new LoginController();
 
