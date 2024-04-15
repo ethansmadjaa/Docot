@@ -1,9 +1,9 @@
-package Controller;
+package controller;
 
-import Model.Docteur;
-import Model.RdvModel;
-import Model.RendezVous;
-import Model.Search;
+import model.Docteur;
+import model.RdvModel;
+import model.RendezVous;
+import model.Search;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class SearchController {
 
         RdvModel rdv = new RdvModel();
 
-        ArrayList<RendezVous> rendezVous = new ArrayList<>();
+        ArrayList<RendezVous> rendezVous;
 
         rendezVous = rdv.searchRendezVous(id);
 
