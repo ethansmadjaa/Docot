@@ -1,7 +1,4 @@
-import Model.Login;
-import View.LoginFrame;
-
-import javax.swing.*;
+import view.LoginFrame;
 
 public class Main {
 
