@@ -5,12 +5,13 @@ import Model.Docteur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class MainMenuDocteur {
 
     private JTextArea RDVArea = new JTextArea(5, 20);
 
-    public MainMenuDocteur(JFrame frame, Docteur docteur) {
+    public MainMenuDocteur(JFrame frame, Docteur docteur) throws SQLException, ClassNotFoundException {
 
         frame.getContentPane().removeAll();
 
@@ -31,7 +32,6 @@ public class MainMenuDocteur {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(20, 0, 20, 0);
         frame.add(title, c);
-
 
         // Doctor's name
         JLabel Intro = new JLabel(
