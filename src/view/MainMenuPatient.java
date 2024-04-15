@@ -1,7 +1,7 @@
-package View;
-import Controller.SearchController;
-import Model.Docteur;
-import Model.Patient;
+package view;
+import controller.SearchController;
+import model.Docteur;
+import model.Patient;
 
 import javax.swing.*;
 import java.awt.*;

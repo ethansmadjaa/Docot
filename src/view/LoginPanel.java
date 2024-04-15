@@ -1,8 +1,8 @@
-package View;
+package view;
 
-import Controller.LoginController;
-import Model.Docteur;
-import Model.Patient;
+import controller.LoginController;
+import model.Docteur;
+import model.Patient;
 
 import javax.swing.*;
 import java.awt.*;

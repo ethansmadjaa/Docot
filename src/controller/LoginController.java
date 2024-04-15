@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.Login;
+import model.Login;
 
 import java.sql.SQLException;
 

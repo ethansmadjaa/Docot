@@ -1,15 +1,15 @@
-package Model;
+package model;
 
 import java.sql.SQLException; // Exception levée en cas de driver non trouvé de la base de données
-import java.util.ArrayList;
+
 
 public interface Dao {
 
     // Etablir la connexion avec la base de données
-    public void connect() throws SQLException, ClassNotFoundException ;
+    void connect() throws SQLException, ClassNotFoundException ;
 
     // Fermer la connexion à la base de données
-    public void disconnect() throws SQLException ;
+    void disconnect() throws SQLException ;
 
 
 }

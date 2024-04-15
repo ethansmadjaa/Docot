@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Model.Docteur;
+import model.Docteur;
 
 
 import javax.swing.*;
@@ -8,8 +8,6 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class MainMenuDocteur {
-
-    private JTextArea RDVArea = new JTextArea(5, 20);
 
     public MainMenuDocteur(JFrame frame, Docteur docteur) throws SQLException, ClassNotFoundException {
 
@@ -66,6 +64,7 @@ public class MainMenuDocteur {
         frame.add(Intro2, c);
 
         // Appointments area
+        JTextArea RDVArea = new JTextArea(5, 20);
         RDVArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(RDVArea);
         c.gridy = 3;
