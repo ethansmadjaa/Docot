@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,11 +25,27 @@ public class RdvModel extends DaoImpl{
                         rset.getString("status"));
                 rendezVous.add(rdv);
             }
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         disconnect();
         return rendezVous;
     }
 
+    public void setRdvStatus(String status, int RendezVousID) throws SQLException, ClassNotFoundException {
+        String query = "UPDATE RendezVous SET Status = ? WHERE rendezVousID = ?";
+
+        connect();
+        try(PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setString(1, status);
+            pstmt.setInt(2, RendezVousID);
+
+            rset = pstmt.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        disconnect();
+    }
 }
 /**
  *
