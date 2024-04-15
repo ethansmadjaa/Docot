@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class RdvModel extends DaoImpl{
 
     public ArrayList<RendezVous> searchRendezVous(int id) throws SQLException, ClassNotFoundException {
-        String query = "select * from RendezVous where RendezVousID= ? AND DateEtHeure > NOW()";
+        String query = "select * from RendezVous where MedecinID= ? AND DateEtHeure > NOW()";
 
         ArrayList<RendezVous> rendezVous = new ArrayList<>();
 
