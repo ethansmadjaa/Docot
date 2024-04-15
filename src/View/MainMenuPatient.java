@@ -93,9 +93,7 @@ public class MainMenuPatient {
         try {
             ArrayList<Docteur> docteurs = searchController.getSearchResults(searchBar.getText());
             resultsArea.setText("");
-            for (Docteur docteur : docteurs) {
-                ViewResults.viewDoctors(scrollPane, docteur);
-            }
+            ViewResults.viewDoctors(scrollPane, docteurs);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
