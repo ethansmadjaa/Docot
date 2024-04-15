@@ -37,4 +37,11 @@ public class Patient extends DaoImpl {
         }
     }
 
+    public String getNom() {
+        return Nom;
+    }
+    public String getPrenom() {
+        return Prenom;
+    }
+
 }
