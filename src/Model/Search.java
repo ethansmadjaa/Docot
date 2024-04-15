@@ -41,6 +41,9 @@ public class Search extends DaoImpl {
             }
             else {
                 System.out.println("Results:");
+                for(Integer result : results){
+                    System.out.println(result);
+                }
             }
 
         } catch (SQLException e) {
