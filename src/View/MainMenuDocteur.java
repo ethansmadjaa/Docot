@@ -39,9 +39,9 @@ public class MainMenuDocteur {
                 docteur.getNom() +
                 ", pret a sauver des vies ?",
                 SwingConstants.CENTER);
-
         Intro.setFont(new Font("Century Gothic", Font.PLAIN, 32));
         Intro.setForeground(Color.blue);
+
         c.gridx = 0;
         c.gridy = 1;
         c.weightx = 1;
@@ -49,6 +49,21 @@ public class MainMenuDocteur {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(20, 0, 20, 0);
         frame.add(Intro, c);
+
+        // intro 2
+        JLabel Intro2 = new JLabel(
+                "Voici vos prochains Rendez-Vous:",
+                SwingConstants.CENTER);
+        Intro2.setFont(new Font("Century Gothic", Font.PLAIN, 26));
+        Intro2.setForeground(Color.BLACK);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.weightx = 0;
+        c.weighty = 0;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(20, 0, 20, 0);
+        frame.add(Intro2, c);
 
         // Appointments area
         RDVArea.setEditable(false);
@@ -58,7 +73,7 @@ public class MainMenuDocteur {
         c.fill = GridBagConstraints.BOTH;
         frame.add(scrollPane, c);
 
-        ViewResults.searchRdv(frame, docteur.getId());
+        ViewResults.searchRdv(scrollPane, docteur);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
