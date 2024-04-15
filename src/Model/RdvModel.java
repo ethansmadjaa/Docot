@@ -28,13 +28,14 @@ public class RdvModel extends DaoImpl{
         }
         disconnect();
         return rendezVous;
-
-
     }
 
 }
 /**
-        Mettre a jour le status du rdv en passé
+ *
+ * Utiliser un jseparator
+ *
+        Mettre à jour le status du rdv en passé
 
  UPDATE RendezVous SET Status = 'Passé' WHERE DateEtHeure < NOW();
 
