@@ -70,6 +70,9 @@ public class Patient extends DaoImpl {
     public String getPrenom() {
         return Prenom;
     }
+    public int getId() {
+        return id;
+    }
 
     public String toString(){
         return ("nom: " + Nom + ", Prenom: " + Prenom + ", Email: " + Email);
