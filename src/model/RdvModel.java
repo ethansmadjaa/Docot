@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -106,7 +105,6 @@ public class RdvModel extends DaoImpl{
 /**
  *
  * Utiliser un jseparator
- *
         Mettre à jour le status du rdv en passé
 
  UPDATE RendezVous SET Status = 'Passé' WHERE DateEtHeure < NOW();
