@@ -70,7 +70,7 @@ public class MainMenuPatient {
         constraints.weighty = 1;
         constraints.fill = GridBagConstraints.BOTH;
         onglet.add(scrollPane, constraints);
-        searchButton.addActionListener(e -> onSearchButtonClick(searchController, scrollPane));
+        searchButton.addActionListener(e -> onSearchButtonClick(searchController, scrollPane, p));
     }
 
     private JLabel createLabel(String text, Font font, GridBagConstraints constraints, int gridY, JPanel panel) {
@@ -89,11 +89,11 @@ public class MainMenuPatient {
 
     }
 
-    private void onSearchButtonClick(SearchController searchController, JScrollPane scrollPane) {
+    private void onSearchButtonClick(SearchController searchController, JScrollPane scrollPane, Patient patient) {
         try {
             ArrayList<Docteur> docteurs = searchController.getSearchResults(searchBar.getText());
             resultsArea.setText("");
-            ViewResults.viewDoctors(scrollPane, docteurs);
+            ViewResults.viewDoctors(scrollPane, docteurs, patient);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
