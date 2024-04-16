@@ -89,7 +89,8 @@ public class ViewResults {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(5, 5, 5, 5);
 
-            card.add(createLabel("Date et Heure: ", rdv.getDate().toString()), gbc);
+            card.add(createLabel("Date: ", rdv.getDate().toString()), gbc);
+            card.add(createLabel("Heure: ", rdv.getHeure().toString()), gbc);
             card.add(createLabel("Status: ", rdv.getStatus()), gbc);
             card.add(createLabel("Infos du patient:\n ", rdv.getPatientInfo()), gbc);
             card.add(createLabel("Lieu: ", docteur.getLieu()), gbc);
