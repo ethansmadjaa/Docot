@@ -7,8 +7,8 @@ import model.RendezVous;
 import view.ReserverRdvView;
 
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class RdvController {
@@ -20,16 +20,17 @@ public class RdvController {
         this.patient = patient;
     }
 
-    public void reserverrdv(){
+    public void reserverDocteur(){
         ReserverRdvView rdvView = new ReserverRdvView(docteur, patient);
     }
 
-    public boolean checkTimeSlot(Date date) throws SQLException, ClassNotFoundException {
+    public boolean reserverRdv(java.sql.Date date, LocalTime time, int docId, int patId) throws SQLException, ClassNotFoundException {
         RdvModel rdvModel = new RdvModel();
-        ArrayList<RendezVous> rdvList = rdvModel.searchRdvdocIdPatId(docteur.getId(), patient.getId());
-        for(RendezVous rdv : rdvList){
-            return !rdv.getDateEtHeure().equals(date);
-        }
-        return false;
+        return rdvModel.reserverRdv(date, time, docId, patId);
+    }
+
+    public ArrayList<RendezVous> getDocteurRdv() throws SQLException, ClassNotFoundException {
+        RdvModel rdvModel = new RdvModel();
+        return rdvModel.searchRdvdocIdPatId(docteur.getId(), patient.getId());
     }
 }
