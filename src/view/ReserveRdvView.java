@@ -130,8 +130,8 @@ public class ReserveRdvView {
 
                 reserverDialog.dispose();
 
-            };
-        };
+            }
+        }
     }
 
     private ArrayList<RendezVous> getRendezVousByDocteur() throws SQLException, ClassNotFoundException {
