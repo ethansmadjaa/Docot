@@ -36,7 +36,6 @@ public class MainMenuPatient {
 
         frame.getContentPane().add(onglets, BorderLayout.CENTER); // Add the JTabbedPane to the center of the frame's content pane
 
-
         frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true); // Make the frame visible
     }
