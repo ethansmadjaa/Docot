@@ -43,7 +43,7 @@ public class Patient extends DaoImpl {
     }
 
     private void fetchPatientInfoFromID(int patientID) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT PatientID, Nom, Prenom FROM Patients WHERE PatientID = ? ";
+        String sql = "SELECT Email, Nom, Prenom FROM Patients WHERE PatientID = ? ";
 
         connect();
 
@@ -53,9 +53,10 @@ public class Patient extends DaoImpl {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    this.Email = rs.getString("Email");
+
                     this.Nom = rs.getString("Nom");
                     this.Prenom = rs.getString("Prenom");
+                    this.Email = rs.getString("Email");
                 }
             }
         } catch (SQLException e) {
@@ -75,7 +76,7 @@ public class Patient extends DaoImpl {
     }
 
     public String toString(){
-        return ("nom: " + Nom + ", Prenom: " + Prenom + ", Email: " + Email);
+        return ("Nom: " + Nom + " , Prenom: " + Prenom + ",  Email: " + Email);
     }
 
 }
