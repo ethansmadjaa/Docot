@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class RdvModel extends DaoImpl{
 
-    public ArrayList<RendezVous> searchRendezVous(int id) throws SQLException, ClassNotFoundException {
-        String query = "select * from RendezVous where MedecinID= ? AND DateEtHeure > NOW()";
+    public ArrayList<RendezVous> searchRendezVousDocID(int id) throws SQLException, ClassNotFoundException {
+        String query = "select * from RendezVous where MedecinID= ? AND DateEtHeure > NOW() ORDER BY RendezVous.DateEtHeure";
 
         ArrayList<RendezVous> rendezVous = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class RdvModel extends DaoImpl{
     }
 
     public void setRdvStatus(String status, int RendezVousID) throws SQLException, ClassNotFoundException {
-        String query = "UPDATE RendezVous SET Status = ? WHERE rendezVousID = ?";
+        String query = "UPDATE RendezVous SET Status = ? WHERE rendezVousID = ? ";
 
         connect();
         try(PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -45,6 +45,36 @@ public class RdvModel extends DaoImpl{
             e.printStackTrace();
         }
         disconnect();
+    }
+
+    public ArrayList<RendezVous> searchRdvdocIdPatId(int docId, int patId) throws SQLException, ClassNotFoundException {
+        String query =
+                "select * from RendezVous where " +
+                "MedecinID= ? AND PatientID = ? AND DateEtHeure > NOW() " +
+                "ORDER BY RendezVous.DateEtHeure";
+
+        ArrayList<RendezVous> rendezVous = new ArrayList<>();
+
+        connect();
+
+        try(PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, docId);
+            pstmt.setInt(2, patId);
+            rset = pstmt.executeQuery();
+            while (rset.next()) {
+                RendezVous rdv = new RendezVous(
+                        rset.getInt("RendezVousID"),
+                        rset.getInt("PatientID"),
+                        rset.getInt("MedecinID"),
+                        rset.getDate("dateEtHeure"),
+                        rset.getString("status"));
+                rendezVous.add(rdv);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        disconnect();
+        return rendezVous;
     }
 }
 /**
