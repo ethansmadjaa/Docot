@@ -33,7 +33,7 @@ public class ViewResults {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    rdvController.reserver();
+                    rdvController.reserverrdv();
                 }
             });
 

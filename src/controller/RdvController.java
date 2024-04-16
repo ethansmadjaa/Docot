@@ -20,7 +20,7 @@ public class RdvController {
         this.patient = patient;
     }
 
-    public void reserver(){
+    public void reserverrdv(){
         ReserverRdvView rdvView = new ReserverRdvView(docteur, patient);
     }
 
