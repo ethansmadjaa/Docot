@@ -16,7 +16,7 @@ public class Docteur extends DaoImpl{
 
     private  String specialite;
 
-    private final String email;
+    private String email;
 
     public Docteur(int id, String nom, String prenom,String specialite,  String email, String lieu) {
         this.id = id;
@@ -55,6 +55,26 @@ public class Docteur extends DaoImpl{
         return id;
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public void setEmail(String email) {
+        this.email=email;
+    }
+
     public String toString(){
         return nom + " " + prenom + " " + lieu + " " + specialite;
     }
@@ -81,5 +101,52 @@ public class Docteur extends DaoImpl{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean updateInfos(
+            String nom,
+            String prenom,
+            String specialite,
+            String email,
+            String lieu)
+            throws SQLException, ClassNotFoundException {
+
+        String UPDATE_MEDECINS_QUERY =
+                "UPDATE Medecins " +
+                        "SET Nom = ?, " +
+                        "Prenom = ?, " +
+                        "Specialite = ?, " +
+                        "Email = ?, " +
+                        "Lieu = ? " +
+                        "WHERE MedecinID = ?;";
+
+        connect();
+
+        try (PreparedStatement stmt = conn.prepareStatement(UPDATE_MEDECINS_QUERY)) {
+            addQueryParameters(stmt, nom, prenom, specialite, email, lieu, this.id);
+            stmt.executeUpdate();
+            disconnect();
+            stmt.close();
+            setEmail(email);
+            setLieu(lieu);
+            setNom(nom);
+            setPrenom(prenom);
+            setSpecialite(specialite);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // New helper method
+    private void addQueryParameters(PreparedStatement stmt, String nom, String prenom,
+                                    String specialite, String email, String lieu, int id) throws SQLException {
+        stmt.setString(1, nom);
+        stmt.setString(2, prenom);
+        stmt.setString(3, specialite);
+        stmt.setString(4, email);
+        stmt.setString(5, lieu);
+        stmt.setInt(6, id);
     }
 }
