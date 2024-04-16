@@ -84,10 +84,6 @@ public class MainMenuPatient {
         panel.add(component, constraints);
     }
 
-    private void ongletPatient(JPanel onglet, Patient p){
-
-    }
-
     private void onSearchButtonClick(SearchController searchController, JScrollPane scrollPane, Patient patient) {
         try {
             ArrayList<Docteur> docteurs = searchController.getSearchResults(searchBar.getText());
@@ -96,5 +92,138 @@ public class MainMenuPatient {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void ongletPatient(JPanel onglet, Patient p){
+        onglet.setLayout(new BorderLayout());
+
+        // Header panel for the introduction
+        JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        headerPanel.setBackground(Color.white); // Set a light theme or choose a color that matches your design
+
+        JLabel intro = new JLabel(
+                "Bah alors , tu t'es trompé dans ton prénom ?",
+                SwingConstants.CENTER);
+        intro.setFont(new Font("Century Gothic", Font.PLAIN, 32));
+        intro.setForeground(Color.blue);
+        headerPanel.add(intro);
+
+        // Content panel for doctor's information
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new GridLayout(0, 1, 10, 10)); // Single column grid with padding
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40)); // Padding around the grid
+
+        JLabel labelName = new JLabel("Nom: " + p.getNom());
+        JLabel labelPrenom = new JLabel("Prénom: " + p.getPrenom());
+        JLabel labelEmail = new JLabel("Email: " + p.getEmail());
+        // Setting a common font for labels
+        Font labelFont = new Font("Century Gothic", Font.BOLD, 18);
+        labelName.setFont(labelFont);
+        labelPrenom.setFont(labelFont);
+        labelEmail.setFont(labelFont);
+
+        // Adding labels to the content panel
+        contentPanel.add(labelName);
+        contentPanel.add(labelPrenom);
+        contentPanel.add(labelEmail);
+
+        // Button panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton modifyButton = new JButton("Modifier mes informations");
+        modifyButton.addActionListener(e -> {
+            try {
+                if(CreatePopupWindow(p)){
+                    onglet.removeAll();
+                    ongletPatient(onglet, p);
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
+        buttonPanel.add(modifyButton);
+
+        // Adding panels to the main panel
+        onglet.add(headerPanel, BorderLayout.NORTH);
+        onglet.add(contentPanel, BorderLayout.CENTER);
+        onglet.add(buttonPanel, BorderLayout.SOUTH);
+
+        onglet.revalidate();
+        onglet.repaint();
+    }
+
+    private boolean CreatePopupWindow(Patient patient) throws SQLException {
+        // Creating a dialog window for modification
+        JDialog modifyDialog = new JDialog();
+        modifyDialog.setTitle("Modifier mes informations");
+        modifyDialog.setSize(400, 300);
+        modifyDialog.setLocationRelativeTo(null);
+        modifyDialog.setModal(true);
+        modifyDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Panel to hold our form elements
+        JPanel formPanel = new JPanel(new GridLayout(0, 2)); // 0 rows, 2 columns to auto-adjust the number of rows
+
+        // Creating text fields pre-filled with doctor's information
+        JTextField nameField = new JTextField(patient.getNom());
+        JTextField prenomField = new JTextField(patient.getPrenom());
+        JTextField emailField = new JTextField(patient.getEmail());
+
+        // Adding labels and text fields to the panel
+        formPanel.add(new JLabel("Nom:"));
+        formPanel.add(nameField);
+        formPanel.add(new JLabel("Prénom:"));
+        formPanel.add(prenomField);
+        formPanel.add(new JLabel("Email:"));
+        formPanel.add(emailField);
+
+        // Save button to submit changes
+        JButton saveButton = new JButton("Enregistrer");
+
+        saveButton.addActionListener(e -> {
+            int option = JOptionPane.showConfirmDialog(
+                    modifyDialog,
+                    "Confirmer la modification de vos informations" +
+                            "nouvelles informations:" +
+                            "nom: " + nameField.getText() +
+                            "prénom: " + prenomField.getText() +
+                            "email: " + emailField.getText(),
+
+                    "Confirmation de la modification",
+                    JOptionPane.YES_NO_OPTION);
+            try {
+                if (JOptionPane.YES_OPTION == option) {
+                    if (patient.updateInfos(
+                            nameField.getText(),
+                            prenomField.getText(),
+                            emailField.getText())
+                    ) {
+                        JOptionPane.showMessageDialog(
+                                modifyDialog,
+                                "Modification réussie !",
+                                "Confirmation",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        modifyDialog.dispose();
+
+
+                    }
+                }
+                modifyDialog.dispose();
+            }catch(SQLException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        // Adding the form panel and save button to the dialog's content pane
+        modifyDialog.getContentPane().add(formPanel, BorderLayout.CENTER);
+        modifyDialog.getContentPane().add(saveButton, BorderLayout.SOUTH);
+
+        // Display the dialog
+        modifyDialog.setVisible(true);
+        return true;
     }
 }

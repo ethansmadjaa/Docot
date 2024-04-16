@@ -74,9 +74,63 @@ public class Patient extends DaoImpl {
     public int getId() {
         return id;
     }
+    public String getEmail() { return Email; }
+
+    public void setNom(String nom) {
+        this.Nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.Prenom = prenom;
+    }
+
+    public void setEmail(String email) {
+        this.Email=email;
+    }
 
     public String toString(){
         return ("Nom: " + Nom + " , Prenom: " + Prenom + ",  Email: " + Email);
     }
 
+
+    public boolean updateInfos(
+            String nom,
+            String prenom,
+            String email)
+            throws SQLException, ClassNotFoundException {
+
+        String UPDATE_MEDECINS_QUERY =
+                "UPDATE Patients " +
+                        "SET Nom = ?, " +
+                        "Prenom = ?, " +
+                        "Email = ? " +
+                        "WHERE PatientID = ?;";
+
+        connect();
+
+        try (PreparedStatement stmt = conn.prepareStatement(UPDATE_MEDECINS_QUERY)) {
+            addQueryParameters(stmt, nom, prenom,  email, this.id);
+            stmt.executeUpdate();
+            disconnect();
+            stmt.close();
+            setEmail(email);
+            setNom(nom);
+            setPrenom(prenom);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // New helper method
+    private void addQueryParameters(PreparedStatement stmt, String nom, String prenom,
+                                     String email, int id) throws SQLException {
+        stmt.setString(1, nom);
+        stmt.setString(2, prenom);
+        stmt.setString(3, email);
+        stmt.setInt(4, id);
+    }
 }
+
+
