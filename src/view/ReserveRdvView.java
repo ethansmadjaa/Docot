@@ -13,14 +13,14 @@ import java.sql.SQLException;
 import java.time.*;
 import java.util.ArrayList;
 
-public class ReserverRdvView {
+public class ReserveRdvView {
 
     private final Docteur docteur;
     private final Patient patient;
     private final RdvController rdvController;
     private final JDialog reserverDialog;
 
-    public ReserverRdvView(Docteur docteur, Patient patient) {
+    public ReserveRdvView(Docteur docteur, Patient patient) {
         this.docteur = docteur;
         this.patient = patient;
 

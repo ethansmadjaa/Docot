@@ -4,7 +4,7 @@ import model.Docteur;
 import model.Patient;
 import model.RdvModel;
 import model.RendezVous;
-import view.ReserverRdvView;
+import view.ReserveRdvView;
 
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -21,7 +21,7 @@ public class RdvController {
     }
 
     public void reserverDocteur(){
-        ReserverRdvView rdvView = new ReserverRdvView(docteur, patient);
+        ReserveRdvView rdvView = new ReserveRdvView(docteur, patient);
     }
 
     public boolean reserverRdv(java.sql.Date date, LocalTime time, int docId, int patId) throws SQLException, ClassNotFoundException {
