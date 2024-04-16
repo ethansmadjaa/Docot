@@ -30,7 +30,7 @@ public class SearchController {
 
         ArrayList<RendezVous> rendezVous;
 
-        rendezVous = rdv.searchRendezVous(id);
+        rendezVous = rdv.searchRendezVousDocID(id);
 
         if (rendezVous.isEmpty()) {
             return null;
