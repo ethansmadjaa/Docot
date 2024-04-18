@@ -20,6 +20,17 @@ public class RdvController {
         this.patient = patient;
     }
 
+    public static boolean cancelRdv(int rdvId) throws SQLException, ClassNotFoundException {
+        RdvModel rdvModel = new RdvModel();
+
+        if(rdvModel.cancelRdv(rdvId)){
+            return true;
+        }else{
+            throw new RuntimeException("Failed to cancel appointment");
+        }
+
+    }
+
     public void reserverDocteur(){
         ReserveRdvView rdvView = new ReserveRdvView(docteur, patient);
     }
