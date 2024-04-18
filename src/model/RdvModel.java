@@ -9,20 +9,19 @@ import java.util.ArrayList;
 
 public class RdvModel extends DaoImpl{
 
-    public boolean cancelRdv(int rdvId) throws SQLException, ClassNotFoundException {
+    public boolean cancelRdv(int rdvId) throws RuntimeException, SQLException, ClassNotFoundException {
         String query = "DELETE FROM RendezVous WHERE RendezVousID = ?";
+
         connect();
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, rdvId);
             pstmt.executeUpdate();
-            System.out.println("RendezVous canceled.");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Failed to cancel RendezVous.");
-            return false;
+            throw new RuntimeException("Failed to cancel RendezVous.", e);
         }
+
     }
 
     public ArrayList<RendezVous> searchRendezVousDocID(int id) throws SQLException, ClassNotFoundException {
