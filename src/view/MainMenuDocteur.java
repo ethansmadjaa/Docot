@@ -94,7 +94,7 @@ public class MainMenuDocteur {
         c.fill = GridBagConstraints.BOTH;
         panel.add(scrollPane, c);
 
-        ViewResults.searchRdv(scrollPane, docteur);
+        ViewResults.searchRdvDoc(scrollPane, docteur);
 
     }
 
