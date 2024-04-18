@@ -28,7 +28,13 @@ public class Docteur extends DaoImpl{
     }
     public Docteur(String email, String password) throws SQLException, ClassNotFoundException {
         this.email=email;
-        fetchDocteurFromDatabase(email, password);
+        fetchDocteurFromDatabaseEmail(email, password);
+    }
+
+
+    public Docteur(int id) throws SQLException, ClassNotFoundException {
+        this.id = id;
+        fetchDocteurFromDatabaseId(id);
     }
 
     public String getNom() {
@@ -76,10 +82,18 @@ public class Docteur extends DaoImpl{
     }
 
     public String toString(){
-        return nom + " " + prenom + " " + lieu + " " + specialite;
+
+        return "Nom: " +
+                nom +
+                ", Prenom: " +
+                prenom +
+                ", Specialté: " +
+                specialite +
+                ", Email: " +
+                email;
     }
 
-    private void fetchDocteurFromDatabase(String email, String password) throws SQLException, ClassNotFoundException {
+    private void fetchDocteurFromDatabaseEmail(String email, String password) throws SQLException, ClassNotFoundException {
         String sql = "SELECT MedecinID, Nom, Prenom, Specialite, Lieu FROM Medecins WHERE Email = ? AND Motdepasse = ?";
 
         connect();
@@ -95,6 +109,29 @@ public class Docteur extends DaoImpl{
                     this.nom = rs.getString("Nom");
                     this.prenom = rs.getString("Prenom");
                     this.specialite = rs.getString("Specialite");
+                    this.lieu = rs.getString("Lieu");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fetchDocteurFromDatabaseId(int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT Email, Nom, Prenom, Specialite, Lieu FROM Medecins WHERE MedecinID = ?";
+
+        connect();
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    this.nom = rs.getString("Nom");
+                    this.prenom = rs.getString("Prenom");
+                    this.specialite = rs.getString("Specialite");
+                    this.email = rs.getString("Email");
                     this.lieu = rs.getString("Lieu");
                 }
             }
