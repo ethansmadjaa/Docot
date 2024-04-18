@@ -12,6 +12,7 @@ public class RendezVous {
     private final LocalDate date;
     private final LocalTime Heure;
     private String Status;
+    private final String lieu;
 
     public RendezVous(
             int rendezVousID,
@@ -19,13 +20,15 @@ public class RendezVous {
             int medecinID,
             LocalDate dateEtHeure,
             LocalTime heure,
-            String Status) {
+            String Status,
+            String lieu) {
         this.rendezVousID = rendezVousID;
         this.patientID = patientID;
         this.medecinID = medecinID;
         this.date = dateEtHeure;
         this.Heure = heure;
         this.Status = Status;
+        this.lieu = lieu;
     }
 
     public String getStatus() {
@@ -36,9 +39,18 @@ public class RendezVous {
         return date;
     }
 
+    public String getLieu() {
+        return lieu;
+    }
+
     public String getPatientInfo() throws SQLException, ClassNotFoundException {
         Patient patient = new Patient(patientID);
         return patient.toString();
+    }
+
+    public String getDoctorInfo() throws SQLException, ClassNotFoundException {
+        Docteur docteur = new Docteur(medecinID);
+        return docteur.toString();
     }
 
     public void setStatus(String status) throws SQLException, ClassNotFoundException {
@@ -54,5 +66,17 @@ public class RendezVous {
 
     public LocalTime getHeure() {
         return Heure;
+    }
+
+    public int getDocId() {
+        return medecinID;
+    }
+
+    public int getPatientId() {
+        return patientID;
+    }
+
+    public int getRendezVousID() {
+        return rendezVousID;
     }
 }
