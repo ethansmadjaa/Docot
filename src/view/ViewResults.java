@@ -9,11 +9,12 @@ import model.Patient;
 import model.RdvModel;
 import model.RendezVous;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class ViewResults {
 
     public static void viewDoctors(JScrollPane scrollPane, ArrayList<Docteur> docteurs, Patient patient){
@@ -30,11 +31,9 @@ public class ViewResults {
 
             RdvController rdvController = new RdvController(docteur, patient);
 
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            button.addActionListener(e->{
                     rdvController.reserverDocteur();
-                }
+
             });
 
             gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -102,7 +101,7 @@ public class ViewResults {
 
             Patient patient = new Patient(rdv.getPatientId());
 
-            JButton cancelButton = new JButton("Annuler le Rendez-Vous avec le Mr. " + patient.getNom());
+            JButton cancelButton = new JButton("Annuler le Rendez-Vous avec Mr. " + patient.getNom());
 
             cancelButton.addActionListener(e -> {
                 int userChoice = JOptionPane.showConfirmDialog(
@@ -122,6 +121,8 @@ public class ViewResults {
                                     "Rendez vous annulé avec Succès !",
                                     "Confirmation",
                                     JOptionPane.INFORMATION_MESSAGE);
+
+                            MainMenuDocteur.initializeDoctorWindow(Objects.requireNonNull(getCurrentFrame()), docteur);
                         }
                     } catch (SQLException | ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
@@ -193,7 +194,7 @@ public class ViewResults {
                                     "Rendez vous annulé avec Succès !",
                                     "Confirmation",
                                     JOptionPane.INFORMATION_MESSAGE);
-
+                            MainMenuPatient.initializePatientWindow(getCurrentFrame(), patient);
                         }
                     } catch (SQLException | ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
@@ -212,6 +213,16 @@ public class ViewResults {
 
         scrollPane.setViewportView(cards);
         scrollPane.getViewport().setBackground(Color.WHITE);
+
+    }
+
+    public static JFrame getCurrentFrame() {
+        for (Window window : Window.getWindows()) {
+            if (window instanceof JFrame) {
+                return (JFrame) window;
+            }
+        }
+        return new JFrame();
 
     }
 }
