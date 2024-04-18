@@ -14,6 +14,8 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static view.ViewResults.getCurrentFrame;
+
 public class ReserveRdvView {
 
     private final Docteur docteur;
@@ -128,6 +130,7 @@ public class ReserveRdvView {
                         "Réservation réussie !",
                         "Confirmation",
                         JOptionPane.INFORMATION_MESSAGE);
+                        MainMenuPatient.initializePatientWindow(Objects.requireNonNull(getCurrentFrame()), patient);
 
                 reserverDialog.dispose();
 
