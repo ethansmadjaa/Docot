@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 public class MainMenuPatient {
 
-    private final JTextField searchBar = new JTextField(10);
-    private final JTextArea resultsArea = new JTextArea(5, 20);
+    private static final JTextField searchBar = new JTextField(10);
+    private static final JTextArea resultsArea = new JTextArea(5, 20);
     private static final Font BIG_BOLD_CENTURY_FONT = new Font("Century Gothic", Font.BOLD, 48);
     private static final Font BOLD_CENTURY_FONT = new Font("Century Gothic", Font.BOLD, 24);
     private static final Font PLAIN_CENTURY_FONT = new Font("century gothic", Font.PLAIN, 18);
@@ -18,6 +18,10 @@ public class MainMenuPatient {
 
 
     public MainMenuPatient(JFrame frame, Patient patient) throws SQLException, ClassNotFoundException {
+        initializePatientWindow(frame, patient);
+    }
+
+    public static void initializePatientWindow(JFrame frame, Patient patient) throws SQLException, ClassNotFoundException {
         frame.setTitle("Menu principal");
 
         frame.getContentPane().removeAll();
@@ -40,7 +44,7 @@ public class MainMenuPatient {
         frame.setVisible(true); // Make the frame visible
     }
 
-    private void ongletRecherche(JPanel onglet, Patient p) {
+    private static void ongletRecherche(JPanel onglet, Patient p) {
         onglet.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         SearchController searchController = new SearchController();
@@ -73,19 +77,19 @@ public class MainMenuPatient {
         searchButton.addActionListener(e -> onSearchButtonClick(searchController, scrollPane, p));
     }
 
-    private JLabel createLabel(String text, Font font, GridBagConstraints constraints, int gridY, JPanel panel) {
+    private static JLabel createLabel(String text, Font font, GridBagConstraints constraints, int gridY, JPanel panel) {
         JLabel label = new JLabel(text, SwingConstants.CENTER);
         label.setFont(font);
         addComponentToPanel(label, constraints, gridY, panel);
         return label;
     }
 
-    private void addComponentToPanel(Component component, GridBagConstraints constraints, int gridY, JPanel panel) {
+    private static void addComponentToPanel(Component component, GridBagConstraints constraints, int gridY, JPanel panel) {
         constraints.gridy = gridY;
         panel.add(component, constraints);
     }
 
-    private void onSearchButtonClick(SearchController searchController, JScrollPane scrollPane, Patient patient) {
+    private static void onSearchButtonClick(SearchController searchController, JScrollPane scrollPane, Patient patient) {
         try {
             ArrayList<Docteur> docteurs = searchController.getSearchResults(searchBar.getText());
             resultsArea.setText("");
@@ -95,7 +99,7 @@ public class MainMenuPatient {
         }
     }
 
-    private void ongletPatient(JPanel mainPanel, Patient patient) throws SQLException, ClassNotFoundException {
+    private static void ongletPatient(JPanel mainPanel, Patient patient) throws SQLException, ClassNotFoundException {
         mainPanel.setLayout(new BorderLayout());
         Font headerFont = new Font("Century Gothic", Font.PLAIN, 32);
         Font labelFont = new Font("Century Gothic", Font.BOLD, 18);
@@ -149,13 +153,13 @@ public class MainMenuPatient {
         mainPanel.repaint();
     }
 
-    private JLabel createPatientInfoLabel(String prefixText, String patientInfo, Font font) {
+    private static JLabel createPatientInfoLabel(String prefixText, String patientInfo, Font font) {
         JLabel label = new JLabel(prefixText + patientInfo);
         label.setFont(font);
         return label;
     }
 
-    private boolean createPopupWindow(Patient patient) throws SQLException {
+    private static boolean createPopupWindow(Patient patient) throws SQLException {
         // Creating a dialog window for modification
         JDialog modifyDialog = new JDialog();
         modifyDialog.setTitle("Modifier mes informations");

@@ -8,10 +8,16 @@ import java.awt.*;
 
 import java.sql.SQLException;
 
+@SuppressWarnings("ALL")
 public class MainMenuDocteur {
 
     public MainMenuDocteur(JFrame frame, Docteur docteur) throws SQLException, ClassNotFoundException {
 
+        initializeDoctorWindow(frame, docteur);
+
+    }
+
+    public static void initializeDoctorWindow(JFrame frame, Docteur docteur) throws SQLException, ClassNotFoundException {
         frame.setTitle("Menu principal");
 
         frame.getContentPane().removeAll();
@@ -32,10 +38,9 @@ public class MainMenuDocteur {
 
         frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true); // Make the frame visible
-
     }
 
-    public void ongletRendezVous(JPanel panel, Docteur docteur) throws SQLException, ClassNotFoundException {
+    public static void ongletRendezVous(JPanel panel, Docteur docteur) throws SQLException, ClassNotFoundException {
 
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -98,7 +103,7 @@ public class MainMenuDocteur {
 
     }
 
-    public void ongletDocteur(JPanel panel, Docteur docteur) {
+    public static void ongletDocteur(JPanel panel, Docteur docteur) {
         panel.setLayout(new BorderLayout());
 
         // Header panel for the introduction
@@ -166,7 +171,7 @@ public class MainMenuDocteur {
     }
 
 
-    private boolean CreatePopupWindow(Docteur docteur) throws SQLException {
+    private static boolean CreatePopupWindow(Docteur docteur) throws SQLException {
         // Creating a dialog window for modification
         JDialog modifyDialog = new JDialog();
         modifyDialog.setTitle("Modifier mes informations");
