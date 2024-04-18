@@ -19,6 +19,8 @@ public class Main {
         frame.setContentPane(login);
 
         frame.setVisible(true);
-
     }
+
+
+    ///installer la base de données et Jcalendar et mysql
 }
