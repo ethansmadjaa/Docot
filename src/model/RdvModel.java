@@ -9,6 +9,22 @@ import java.util.ArrayList;
 
 public class RdvModel extends DaoImpl{
 
+    public boolean cancelRdv(int rdvId) throws SQLException, ClassNotFoundException {
+        String query = "DELETE FROM RendezVous WHERE RendezVousID = ?";
+        connect();
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, rdvId);
+            pstmt.executeUpdate();
+            System.out.println("RendezVous canceled.");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to cancel RendezVous.");
+            return false;
+        }
+    }
+
     public ArrayList<RendezVous> searchRendezVousDocID(int id) throws SQLException, ClassNotFoundException {
         String query = "select * from RendezVous where MedecinID= ? AND Date >= NOW() ORDER BY Record";
 
@@ -26,7 +42,36 @@ public class RdvModel extends DaoImpl{
                         rset.getInt("MedecinID"),
                         rset.getDate("Date").toLocalDate(),
                         rset.getTime("Heure").toLocalTime(),
-                        rset.getString("status"));
+                        rset.getString("status"),
+                        rset.getString("lieu"));
+                rendezVous.add(rdv);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        disconnect();
+        return rendezVous;
+    }
+
+    public ArrayList<RendezVous> searchRendezVousPatID(int id) throws SQLException, ClassNotFoundException {
+        String query = "select * from RendezVous where PatientID= ? AND Date >= NOW() ORDER BY Record";
+
+        ArrayList<RendezVous> rendezVous = new ArrayList<>();
+
+        connect();
+
+        try(PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, id);
+            rset = pstmt.executeQuery();
+            while (rset.next()) {
+                RendezVous rdv = new RendezVous(
+                        rset.getInt("RendezVousID"),
+                        rset.getInt("PatientID"),
+                        rset.getInt("MedecinID"),
+                        rset.getDate("Date").toLocalDate(),
+                        rset.getTime("Heure").toLocalTime(),
+                        rset.getString("status"),
+                        rset.getString("lieu"));
                 rendezVous.add(rdv);
             }
         }catch (SQLException e){
@@ -72,7 +117,8 @@ public class RdvModel extends DaoImpl{
                         rset.getInt("MedecinID"),
                         rset.getDate("Date").toLocalDate(),
                         rset.getTime("Heure").toLocalTime(),
-                        rset.getString("status"));
+                        rset.getString("status"),
+                        rset.getString("lieu"));
                 rendezVous.add(rdv);
             }
         }catch (SQLException e){
@@ -83,14 +129,17 @@ public class RdvModel extends DaoImpl{
     }
 
     public boolean reserverRdv(Date date, LocalTime time, int docId, int patId)throws SQLException, ClassNotFoundException {
-        String query = "Insert INTO RendezVous (PatientId, MedecinID, Date, Heure, Status) VALUES (?,?,?,?,?)";
+        String query = "Insert INTO RendezVous (PatientId, MedecinID, Date, Heure, lieu, Status) VALUES (?,?,?,?,?,?)";
         connect();
+
+        Docteur docteur = new Docteur(docId);
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, patId);
             pstmt.setInt(2, docId);
             pstmt.setDate(3, date);
             pstmt.setTime(4, Time.valueOf(time));
+            pstmt.setString(5, docteur.getLieu());
             pstmt.setString(5, "Reservé");
             pstmt.executeUpdate();
             System.out.println("reservation effectuée.");
