@@ -5,11 +5,13 @@ import model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 public class MainMenuPatient {
 
-    private static final JTextField searchBar = new JTextField(10);
+    private static final JTextField searchBar = new JTextField();
     private static final JTextArea resultsArea = new JTextArea(5, 20);
     private static final Font BIG_BOLD_CENTURY_FONT = new Font("Century Gothic", Font.BOLD, 48);
     private static final Font BOLD_CENTURY_FONT = new Font("Century Gothic", Font.BOLD, 24);
@@ -55,6 +57,30 @@ public class MainMenuPatient {
         String patientLabel = p.getNom() + " " + p.getPrenom() + ", qu'est ce qu'il ne va pas aujourd'hui ?";
         JLabel patientNameLabel = createLabel(patientLabel, BOLD_CENTURY_FONT, constraints, 1, onglet);
         addComponentToPanel(patientNameLabel, constraints, 1, onglet);
+
+        searchBar.setText("Entrez le nom d'un medecin, sa spécialité, ou son lieu de travail");
+
+        searchBar.setForeground(Color.GRAY);
+
+
+
+        // Add Focus Listener
+        searchBar.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if (searchBar.getText().equals("Entrez le nom d'un medecin, sa spécialité, ou son lieu de travail")) {
+                    searchBar.setText("");
+                    searchBar.setForeground(Color.BLACK);
+                }
+            }
+
+            public void focusLost(FocusEvent e) {
+                if (searchBar.getText().isEmpty()) {
+                    searchBar.setForeground(Color.GRAY);
+                    searchBar.setText("Entrez le nom d'un medecin, sa spécialité, ou son lieu de travail");
+                }
+            }
+        });
+
 
         constraints.weightx = 0;
         constraints.ipadx = 150;
