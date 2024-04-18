@@ -42,6 +42,6 @@ public class RdvController {
 
     public ArrayList<RendezVous> getDocteurRdv() throws SQLException, ClassNotFoundException {
         RdvModel rdvModel = new RdvModel();
-        return rdvModel.searchRdvdocIdPatId(docteur.getId(), patient.getId());
+        return rdvModel.searchRdvDocIdPatId(docteur.getId(), patient.getId());
     }
 }
