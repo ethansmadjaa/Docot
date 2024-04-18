@@ -19,6 +19,17 @@ public class Patient extends DaoImpl {
         fetchPatientInfoFromID(patientID);
     }
 
+    public Patient(String nom, String prenom, String email, String password) {
+        this.Nom = nom;
+        this.Prenom = prenom;
+        this.Email = email;
+        try {
+            insertPatientIntoDb(nom, prenom, email, password);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     private void fetchPatientInfoFromEmail(String email, String password) throws SQLException, ClassNotFoundException {
         String sql = "SELECT PatientID, Nom, Prenom FROM Patients WHERE Email = ? AND Motdepasse = ?";
@@ -62,6 +73,24 @@ public class Patient extends DaoImpl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void insertPatientIntoDb(String nom, String prenom, String email, String password) throws SQLException, ClassNotFoundException {
+        String query = "INSERT INTO Patients (Nom, Prenom, Email, MotDePasse) VALUES (?, ?, ?, ?)";
+
+        connect();
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, nom);
+            stmt.setString(2, prenom);
+            stmt.setString(3, email);
+            stmt.setString(4, password);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        fetchPatientInfoFromEmail(email, password);
     }
 
 
