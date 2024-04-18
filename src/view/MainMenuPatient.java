@@ -17,7 +17,7 @@ public class MainMenuPatient {
     private static final String DOCTOLIB = "Doctolib";
 
 
-    public MainMenuPatient(JFrame frame, Patient patient) {
+    public MainMenuPatient(JFrame frame, Patient patient) throws SQLException, ClassNotFoundException {
         frame.setTitle("Menu principal");
 
         frame.getContentPane().removeAll();
@@ -50,6 +50,7 @@ public class MainMenuPatient {
         titleLabel.setForeground(Color.BLUE);
         String patientLabel = p.getNom() + " " + p.getPrenom() + ", qu'est ce qu'il ne va pas aujourd'hui ?";
         JLabel patientNameLabel = createLabel(patientLabel, BOLD_CENTURY_FONT, constraints, 1, onglet);
+        addComponentToPanel(patientNameLabel, constraints, 1, onglet);
 
         constraints.weightx = 0;
         constraints.ipadx = 150;
@@ -94,67 +95,67 @@ public class MainMenuPatient {
         }
     }
 
-    private void ongletPatient(JPanel onglet, Patient p){
-        onglet.setLayout(new BorderLayout());
-
-        // Header panel for the introduction
-        JPanel headerPanel = new JPanel();
-        headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        headerPanel.setBackground(Color.white); // Set a light theme or choose a color that matches your design
-
-        JLabel intro = new JLabel(
-                "Bah alors , tu t'es trompé dans ton prénom ?",
-                SwingConstants.CENTER);
-        intro.setFont(new Font("Century Gothic", Font.PLAIN, 32));
-        intro.setForeground(Color.blue);
-        headerPanel.add(intro);
-
-        // Content panel for doctor's information
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(0, 1, 10, 10)); // Single column grid with padding
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40)); // Padding around the grid
-
-        JLabel labelName = new JLabel("Nom: " + p.getNom());
-        JLabel labelPrenom = new JLabel("Prénom: " + p.getPrenom());
-        JLabel labelEmail = new JLabel("Email: " + p.getEmail());
-        // Setting a common font for labels
+    private void ongletPatient(JPanel mainPanel, Patient patient) throws SQLException, ClassNotFoundException {
+        mainPanel.setLayout(new BorderLayout());
+        Font headerFont = new Font("Century Gothic", Font.PLAIN, 32);
         Font labelFont = new Font("Century Gothic", Font.BOLD, 18);
-        labelName.setFont(labelFont);
-        labelPrenom.setFont(labelFont);
-        labelEmail.setFont(labelFont);
 
-        // Adding labels to the content panel
-        contentPanel.add(labelName);
-        contentPanel.add(labelPrenom);
-        contentPanel.add(labelEmail);
+        // Header Panel
+        JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.PAGE_AXIS));
+        headerPanel.setBackground(Color.white);
+        JLabel introLabel = new JLabel("Profil de " + patient.getPrenom() + " " + patient.getNom(), SwingConstants.CENTER);
+        introLabel.setFont(headerFont);
+        introLabel.setForeground(Color.blue);
+        headerPanel.add(introLabel);
+        headerPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacer
 
-        // Button panel
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // Patient Info Panel
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(0, 1, 10, 10));
+        infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        infoPanel.add(createPatientInfoLabel("Nom: ", patient.getNom(), labelFont));
+        infoPanel.add(createPatientInfoLabel("Prénom: ", patient.getPrenom(), labelFont));
+        infoPanel.add(createPatientInfoLabel("Email: ", patient.getEmail(), labelFont));
+
+        // Modify Info Button
         JButton modifyButton = new JButton("Modifier mes informations");
         modifyButton.addActionListener(e -> {
             try {
-                if(CreatePopupWindow(p)){
-                    onglet.removeAll();
-                    ongletPatient(onglet, p);
+                if (createPopupWindow(patient)) {
+                    mainPanel.removeAll();
+                    ongletPatient(mainPanel, patient); // Refresh the patient tab
                 }
-
-            } catch (SQLException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
         });
-        buttonPanel.add(modifyButton);
 
-        // Adding panels to the main panel
-        onglet.add(headerPanel, BorderLayout.NORTH);
-        onglet.add(contentPanel, BorderLayout.CENTER);
-        onglet.add(buttonPanel, BorderLayout.SOUTH);
+        infoPanel.add(modifyButton);
 
-        onglet.revalidate();
-        onglet.repaint();
+        // Appointments Area
+        JTextArea appointmentsArea = new JTextArea(5, 20);
+        appointmentsArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(appointmentsArea);
+        // Assuming viewResults.searchRdvPat method is defined elsewhere and fills the appointmentsArea
+        ViewResults.searchRdvPat(scrollPane, patient);
+
+        // Adding all panels to the main panel
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
+        mainPanel.add(infoPanel, BorderLayout.CENTER);
+        // Add the scrollPane for appointments before the button panel
+        mainPanel.add(scrollPane, BorderLayout.EAST);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
-    private boolean CreatePopupWindow(Patient patient) throws SQLException {
+    private JLabel createPatientInfoLabel(String prefixText, String patientInfo, Font font) {
+        JLabel label = new JLabel(prefixText + patientInfo);
+        label.setFont(font);
+        return label;
+    }
+
+    private boolean createPopupWindow(Patient patient) throws SQLException {
         // Creating a dialog window for modification
         JDialog modifyDialog = new JDialog();
         modifyDialog.setTitle("Modifier mes informations");
@@ -227,3 +228,5 @@ public class MainMenuPatient {
         return true;
     }
 }
+
+
