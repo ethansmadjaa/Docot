@@ -95,7 +95,7 @@ public class RdvModel extends DaoImpl{
         disconnect();
     }
 
-    public ArrayList<RendezVous> searchRdvdocIdPatId(int docId, int patId) throws SQLException, ClassNotFoundException {
+    public ArrayList<RendezVous> searchRdvDocIdPatId(int docId, int patId) throws SQLException, ClassNotFoundException {
         String query =
                 "select * from RendezVous where " +
                 "MedecinID= ? AND PatientID = ? AND Date >= NOW() " +
@@ -139,7 +139,7 @@ public class RdvModel extends DaoImpl{
             pstmt.setDate(3, date);
             pstmt.setTime(4, Time.valueOf(time));
             pstmt.setString(5, docteur.getLieu());
-            pstmt.setString(5, "Reservé");
+            pstmt.setString(6, "Reservé");
             pstmt.executeUpdate();
             System.out.println("reservation effectuée.");
             return true;
