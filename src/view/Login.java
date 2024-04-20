@@ -173,7 +173,7 @@ public class Login extends JPanel {
                    dialog,
                    nameTextField.getText(),
                    firstNameTextField.getText(),
-                   emailField.getText(),
+                   emailTextField.getText(),
                    new String(passwordField.getPassword()));
         }
         );
