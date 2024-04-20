@@ -36,11 +36,11 @@ public class ReserveRdvView {
         reserverDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         reserverDialog.setLayout(new BorderLayout());
 
-        JCalendar calendar = new JCalendar(); // JCalendar to display a calendar
-        JPanel timeSlotsPanel = new JPanel(new GridLayout(0, 2)); // Two appointments per row
+        JCalendar calendar = new JCalendar();
+        JPanel timeSlotsPanel = new JPanel(new GridLayout(0, 2));
 
-        reserverDialog.add(calendar, BorderLayout.NORTH); // Calendar at the top
-        reserverDialog.add(new JScrollPane(timeSlotsPanel), BorderLayout.CENTER); // Scrollable timeSlotsPanel at the center
+        reserverDialog.add(calendar, BorderLayout.NORTH);
+        reserverDialog.add(new JScrollPane(timeSlotsPanel), BorderLayout.CENTER);
 
         // Add a property change listener to the calendar
         calendar.addPropertyChangeListener("calendar", event -> {
@@ -54,9 +54,9 @@ public class ReserveRdvView {
                         " veuillez choisir une autre date.", "Date invalide", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
-                    updateTimeSlots(selectedDate, timeSlotsPanel); // Method to update the time slots
+                    updateTimeSlots(selectedDate, timeSlotsPanel);
                 } catch (SQLException | ClassNotFoundException e) {
-                    e.printStackTrace(); // Consider displaying an error dialog instead
+                    e.printStackTrace();
                 }
             }
         });
@@ -94,8 +94,8 @@ public class ReserveRdvView {
     }
 
     private void createTimeSlotButtons(Date selectedDate, JPanel timeSlotsPanel) throws SQLException, ClassNotFoundException {
-        LocalTime startTime = LocalTime.of(9, 0); // Start of working hours
-        LocalTime endTime = LocalTime.of(18, 0); // End of working hours
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(18, 0);
         ArrayList<RendezVous> rdv = getRendezVousByDocteur();
         do{
              if (!isTimeSlotTaken(rdv, startTime, selectedDate.toLocalDate())) {
@@ -110,7 +110,7 @@ public class ReserveRdvView {
                  });
                 timeSlotsPanel.add(timeSlotButton);
             }
-            startTime = startTime.plusMinutes(30); // Increment to the next time slot
+            startTime = startTime.plusMinutes(30);
         }while (startTime.isBefore(endTime));
     }
 
