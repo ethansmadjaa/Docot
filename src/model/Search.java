@@ -57,8 +57,6 @@ public class Search extends DaoImpl {
         return results;
     }
 
-
-    //This is used to create Docteur objects after they found it in the results
     public ArrayList<Docteur> searchDocteur(List<Integer> idList) throws SQLException, ClassNotFoundException {
 
         connect();
