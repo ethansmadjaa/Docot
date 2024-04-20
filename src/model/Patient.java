@@ -93,6 +93,8 @@ public class Patient extends DaoImpl {
             e.printStackTrace();
         }
         fetchPatientInfoFromEmail(email, password);
+
+        disconnect();
     }
 
 
@@ -156,7 +158,6 @@ public class Patient extends DaoImpl {
         }
     }
 
-    // New helper method
     private void addQueryParameters(PreparedStatement stmt, String nom, String prenom,
                                      String email, int id) throws SQLException {
         stmt.setString(1, nom);
