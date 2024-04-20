@@ -109,7 +109,7 @@ public class MainMenuDocteur {
         // Header panel for the introduction
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        headerPanel.setBackground(Color.white); // Set a light theme or choose a color that matches your design
+        headerPanel.setBackground(Color.white);
 
         JLabel intro = new JLabel(
                 "Bah alors Doc " + docteur.getNom() + ", tu t'es trompé dans ton prénom ?",
@@ -120,8 +120,8 @@ public class MainMenuDocteur {
 
         // Content panel for doctor's information
         JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(0, 1, 10, 10)); // Single column grid with padding
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40)); // Padding around the grid
+        contentPanel.setLayout(new GridLayout(0, 1, 10, 10));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
         JLabel labelName = new JLabel("Nom: " + docteur.getNom());
         JLabel labelPrenom = new JLabel("Prénom: " + docteur.getPrenom());
@@ -181,7 +181,7 @@ public class MainMenuDocteur {
         modifyDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Panel to hold our form elements
-        JPanel formPanel = new JPanel(new GridLayout(0, 2)); // 0 rows, 2 columns to auto-adjust the number of rows
+        JPanel formPanel = new JPanel(new GridLayout(0, 2));
 
         // Creating text fields pre-filled with doctor's information
         JTextField nameField = new JTextField(docteur.getNom());
