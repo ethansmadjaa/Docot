@@ -53,17 +53,6 @@ public class RendezVous {
         return docteur.toString();
     }
 
-    public void setStatus(String status) throws SQLException, ClassNotFoundException {
-        RdvModel rdvModel = new RdvModel();
-
-        //Changer le status dans l'objet
-        this.Status = status;
-
-        //Changer le status sur la bdd
-        rdvModel.setRdvStatus(status, rendezVousID);
-
-    }
-
     public LocalTime getHeure() {
         return Heure;
     }
