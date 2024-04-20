@@ -185,7 +185,7 @@ public class MainMenuPatient {
         return label;
     }
 
-    private static boolean createPopupWindow(Patient patient) throws SQLException {
+    private static boolean createPopupWindow(Patient patient) {
         // Creating a dialog window for modification
         JDialog modifyDialog = new JDialog();
         modifyDialog.setTitle("Modifier mes informations");
