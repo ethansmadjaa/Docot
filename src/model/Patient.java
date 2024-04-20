@@ -47,6 +47,7 @@ public class Patient extends DaoImpl {
                     this.Nom = rs.getString("Nom");
                     this.Prenom = rs.getString("Prenom");
                 }
+                disconnect();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,6 +70,7 @@ public class Patient extends DaoImpl {
                     this.Prenom = rs.getString("Prenom");
                     this.Email = rs.getString("Email");
                 }
+                disconnect();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,9 +147,11 @@ public class Patient extends DaoImpl {
             setEmail(email);
             setNom(nom);
             setPrenom(prenom);
+            disconnect();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            disconnect();
             return false;
         }
     }
