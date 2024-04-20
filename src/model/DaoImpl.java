@@ -30,7 +30,6 @@ public class DaoImpl implements Dao {
         System.out.println("Connected to database");
     }
 
-
     @Override
     public void disconnect() throws SQLException {
         conn.close();
