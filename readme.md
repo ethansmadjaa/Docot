@@ -43,7 +43,7 @@ données et JFreeChart pour la génération de rapports sous forme de graphiques
 4. Configurez la connexion à la base de données en modifiant le fichier de 
 configuration avec vos propres paramètres de connexion.
 
-5. Aller dans Project Structure > Librairies, appuyer le l'icône +, "From Maven" , et ajouter ces deux bibliothèques: 
+5. ##### Aller dans Project Structure > Librairies, appuyer le l'icône +, "From Maven" , et ajouter ces deux bibliothèques: 
 ### JCalendar
 ```sh
 io.github.lzh0379.jdatepicker
