@@ -27,6 +27,7 @@ public class RdvController {
             return true;
         }else{
             throw new RuntimeException("Failed to cancel appointment");
+
         }
 
     }
