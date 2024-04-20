@@ -176,7 +176,6 @@ public class Docteur extends DaoImpl{
         }
     }
 
-    // New helper method
     private void addQueryParameters(PreparedStatement stmt, String nom, String prenom,
                                     String specialite, String email, String lieu, int id) throws SQLException {
         stmt.setString(1, nom);
