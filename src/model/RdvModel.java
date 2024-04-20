@@ -17,6 +17,7 @@ public class RdvModel extends DaoImpl{
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, rdvId);
             pstmt.executeUpdate();
+            disconnect();
             return true;
         } catch (SQLException e) {
             throw new RuntimeException("Failed to cancel RendezVous.", e);
@@ -142,10 +143,12 @@ public class RdvModel extends DaoImpl{
             pstmt.setString(6, "Reservé");
             pstmt.executeUpdate();
             System.out.println("reservation effectuée.");
+            disconnect();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("reservation échouée.");
+            disconnect();
             return false;
         }
     }
