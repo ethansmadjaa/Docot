@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import controller.RdvController;
+import controller.SearchController;
 import model.Docteur;
 import model.Patient;
 import model.RdvModel;
@@ -33,7 +34,6 @@ public class ViewResults {
 
             button.addActionListener(e->{
                     rdvController.reserverDocteur();
-
             });
 
             gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -63,15 +63,15 @@ public class ViewResults {
         scrollPane.getViewport().setBackground(Color.WHITE);
     }
 
-
-
     private static JLabel createLabel(String prefix, String text) {
         return new JLabel(prefix + text);
     }
 
     public static void searchRdvDoc(JScrollPane scrollPane, Docteur docteur) throws SQLException, ClassNotFoundException {
-        RdvModel rdvModel = new RdvModel();
-        ArrayList<RendezVous> listRdv = rdvModel.searchRendezVousDocID(docteur.getId());
+
+        SearchController searchController = new SearchController();
+
+        ArrayList<RendezVous> listRdv = searchController.getRendezVous(docteur.getId());
 
         JPanel cards = new JPanel();
         cards.setLayout(new BoxLayout(cards, BoxLayout.Y_AXIS));
@@ -198,22 +198,17 @@ public class ViewResults {
                         }
                     } catch (SQLException | ClassNotFoundException ex) {
                         throw new RuntimeException(ex);
-
                     }
                 }
-
             });
-
             card.add(cancelButton, gbc);
             JPanel wrapper = new JPanel(new BorderLayout());
             wrapper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             wrapper.add(card);
             cards.add(wrapper);
         }
-
         scrollPane.setViewportView(cards);
         scrollPane.getViewport().setBackground(Color.WHITE);
-
     }
 
     public static JFrame getCurrentFrame() {
@@ -223,6 +218,5 @@ public class ViewResults {
             }
         }
         return new JFrame();
-
     }
 }
