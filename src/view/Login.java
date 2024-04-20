@@ -201,7 +201,7 @@ public class Login extends JPanel {
                 frame.repaint();
                 MainMenuPatient window = new MainMenuPatient(frame, patient);
 
-            };
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(dialog,
                     "Unable to create account. Error: " + e.getMessage(),
