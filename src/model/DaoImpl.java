@@ -7,14 +7,7 @@ public class DaoImpl implements Dao {
     public Connection conn;
     public Statement stmt;
     public ResultSet rset;
-    public ResultSetMetaData rsetMeta;
 
-    public DaoImpl(Connection conn, Statement stmt, ResultSet rset, ResultSetMetaData rsetMeta) {
-        this.conn = conn;
-        this.stmt = stmt;
-        this.rset = rset;
-        this.rsetMeta = rsetMeta;
-    }
 
     public DaoImpl() {
 
