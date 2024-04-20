@@ -195,7 +195,7 @@ public class MainMenuPatient {
         modifyDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Panel to hold our form elements
-        JPanel formPanel = new JPanel(new GridLayout(0, 2)); // 0 rows, 2 columns to auto-adjust the number of rows
+        JPanel formPanel = new JPanel(new GridLayout(0, 2));
 
         // Creating text fields pre-filled with doctor's information
         JTextField nameField = new JTextField(patient.getNom());
@@ -249,11 +249,9 @@ public class MainMenuPatient {
             }
         });
 
-        // Adding the form panel and save button to the dialog's content pane
         modifyDialog.getContentPane().add(formPanel, BorderLayout.CENTER);
         modifyDialog.getContentPane().add(saveButton, BorderLayout.SOUTH);
 
-        // Display the dialog
         modifyDialog.setVisible(true);
         return true;
     }
