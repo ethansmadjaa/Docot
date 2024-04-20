@@ -17,10 +17,6 @@ réservations et les clients.
 - [Features](#-features)
 - [Installation](#-installation)
 - [Usage](#-usage)
-- [Contributing](#-contributing)
-- [Gitmoji guide](#-gitmoji-guide)
-
-
 
 # ✨ Features
 
@@ -47,63 +43,25 @@ données et JFreeChart pour la génération de rapports sous forme de graphiques
 4. Configurez la connexion à la base de données en modifiant le fichier de 
 configuration avec vos propres paramètres de connexion.
 
+5. Aller dans Project Structure > Librairies, appuyer le l'icône +, "From Maven" , et ajouter ces deux bibliothèques: 
+### JCalendar
+```sh
+io.github.lzh0379.jdatepicker
+```
+
+### MySql
+```sh
+mysql.connector.java
+```
+
+
 # 🚀 Usage
 
 Pour lancer l'application ECE RDV Médical, procédez comme suit :
 
 1. Lancez votre serveur MySQL et créez la base de données en exécutant le script SQL fourni avec le projet.
 
-2. Ouvrez le projet dans votre IDE et exécutez-le. Si un fichier exécutable `.jar` est fourni, vous pouvez 
-également exécuter l'application en utilisant la commande :
-   ```sh
-   java -jar ECE-RDV-Medical.jar
-
-# 👨‍💻 Contributing
-
-1. Verifiez le nom des dernieres branches
-
-2. Apartir de la branche doc-1, Créez votre branche de fonctionnalité 
-   ```sh
-   git checkout -b doc-n
-   ```
-
-3. Committez vos changements 
-   ```sh
-   git commit -m ':emoji: Feature implemented'
-   ```
-
-4. Push vers la branche 
-   ```sh
-   git push doc-1 doc-n
-   ```
-
-5. Ouvrez une Pull Request, depuis [github](https://github.com/ethansmadjaa/DoctoLibECE.git)
-
-
-# 😃 Gitmoji Guide
-
-Incorporating gitmojis into your commit messages can make them more engaging 
-and easier to understand at a glance. Here's a quick guide to using emojis in your commits:
-
-- 🎉 `:tada:` for initial commits.
-- ✨ `:sparkles:` when introducing new features.
-- 🐛 `:bug:` when fixing a bug.
-- 📝 `:memo:` for updates to documentation.
-- 💄 `:lipstick:` for cosmetic changes to the UI.
-- 🔧 `:wrench:` when changing configuration files.
-- 🚀 `:rocket:` when improving performance.
-- 🚧 `:construction:` for work in progress.
-- 🗑️ `:wastebasket:` when removing code or files.
-
-To add a gitmoji to your commit message, simply start the message with the corresponding code. For example:
-
-```bash
-git commit -m ":sparkles: Add search functionality"
-```
-This approach helps to visually categorize commit types, making your project's history more readable and fun!
-
-For a comprehensive list of gitmojis and their meanings, visit [Gitmoji](https://gitmoji.dev).
-
+2. Ouvrez le projet dans votre IDE, ouvrez le fichier Main et exécutez-le.
 
 # ✍️ Auteurs du projet
 ### [Ethan SMADJA](mailto:Ethan.smadja@edu.ece.fr)
