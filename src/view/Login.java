@@ -162,7 +162,7 @@ public class Login extends JPanel {
         contentPanel.add(emailTextField);
         contentPanel.add(passwordLabel);
         contentPanel.add(passwordField);
-        contentPanel.add(new JLabel("")); // Placeholder for grid alignment
+        contentPanel.add(new JLabel(""));
 
         // Button panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
