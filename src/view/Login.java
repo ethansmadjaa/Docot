@@ -128,68 +128,85 @@ public class Login extends JPanel {
     public void createAnAccount(JFrame frame) {
         // Create a dialog window
         JDialog dialog = new JDialog(frame, "Créer un compte", true);
-        dialog.setSize(300, 200);
-        dialog.setLayout(new GridLayout(5, 2, 10, 10));
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(350, 250);
         dialog.setLocationRelativeTo(frame);
 
-        // Create labels and text fields for user information
-        JLabel nomLabel = new JLabel("Nom:");
-        JTextField nomField = new JTextField();
-        JLabel prenomLabel = new JLabel("Prénom:");
-        JTextField prenomField = new JTextField();
+        // Title Panel
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JLabel titleLabel = new JLabel("Créer un nouveau compte");
+        titleLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        titlePanel.add(titleLabel);
+
+        JPanel contentPanel = new JPanel(new GridLayout(5, 2, 10, 10));
+
+        // Create labels
+        JLabel nameLabel = new JLabel("Nom:");
+        JLabel firstNameLabel = new JLabel("Prénom:");
         JLabel emailLabel = new JLabel("Email:");
-        JTextField emailField = new JTextField();
-        JLabel motDePasseLabel = new JLabel("Mot de Passe:");
-        JPasswordField motDePasseField = new JPasswordField();
+        JLabel passwordLabel = new JLabel("Mot de Passe:");
 
-        // Create button to submit the form
+        // Create text fields
+        JTextField nameTextField = new JTextField(20);
+        JTextField firstNameTextField = new JTextField(20);
+        JTextField emailTextField = new JTextField(20);
+        JPasswordField passwordField = new JPasswordField(20);
+
+        // Add components to the panel
+        contentPanel.add(nameLabel);
+        contentPanel.add(nameTextField);
+        contentPanel.add(firstNameLabel);
+        contentPanel.add(firstNameTextField);
+        contentPanel.add(emailLabel);
+        contentPanel.add(emailTextField);
+        contentPanel.add(passwordLabel);
+        contentPanel.add(passwordField);
+        contentPanel.add(new JLabel("")); // Placeholder for grid alignment
+
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton createAccountButton = new JButton("Créer");
-        createAccountButton.addActionListener(e -> {
 
-            Patient patient = createPatientAccount(nomField.getText(), prenomField.getText(), emailField.getText(), new String(motDePasseField.getPassword()));
-            // Here, add your logic to create an account in your system
-            if (patient != null) {
-                 // Account creation successful
-                 frame.getContentPane().removeAll();
-                try {
-                    MainMenuPatient window = new MainMenuPatient(frame, patient);
-                } catch (SQLException | ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-                frame.revalidate();
-                 frame.repaint();
-                 dialog.dispose();
-             } else {
-                JOptionPane.showMessageDialog(dialog, "Erreur de création de compte", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        createAccountButton.addActionListener(e ->{
+               createPatientAccount(
+                   dialog,
+                   nameTextField.getText(),
+                   firstNameTextField.getText(),
+                   emailField.getText(),
+                   new String(passwordField.getPassword()));
+        }
+        );
+        buttonPanel.add(createAccountButton);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Add components to the dialog
-        dialog.add(nomLabel);
-        dialog.add(nomField);
-        dialog.add(prenomLabel);
-        dialog.add(prenomField);
-        dialog.add(emailLabel);
-        dialog.add(emailField);
-        dialog.add(motDePasseLabel);
-        dialog.add(motDePasseField);
-        dialog.add(new JLabel());
-        dialog.add(createAccountButton);
+        // Adding panels to the dialog
+        dialog.add(titlePanel, BorderLayout.NORTH);
+        dialog.add(contentPanel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
 
         // Show the dialog
         dialog.setVisible(true);
     }
 
-    // Example method to create patient account, to be implemented according to your application logic
-    private Patient createPatientAccount(String nom, String prenom, String email, String motDePasse) {
-        Patient patient = new Patient(nom, prenom, email, motDePasse);
-        if(patient.getId() != 0){
-            return patient;
-        }else{
-            JOptionPane.showMessageDialog(frame, "Erreur de création de compte", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return null;
+    private void createPatientAccount(JDialog dialog, String nom, String prenom, String email, String motDePasse) {
+        try {
+            Patient patient = new Patient(nom, prenom, email, motDePasse);
+
+            if(patient.getId() != 0){
+                dialog.setVisible(false);
+                dialog.dispose();
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                MainMenuPatient window = new MainMenuPatient(frame, patient);
+
+            };
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(dialog,
+                    "Unable to create account. Error: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-
     }
-
 }
