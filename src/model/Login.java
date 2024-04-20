@@ -8,7 +8,7 @@ public class Login extends DaoImpl {
     public int checkCredentials(String username, String password) throws SQLException, ClassNotFoundException {
         connect();
 
-        // Verify Medecins credentials
+        // Verify Doctor credentials
         if (verifyUserCredentials(username, password, "Medecins")) {
             disconnect();
             return 2;
@@ -20,7 +20,6 @@ public class Login extends DaoImpl {
             return 1;
         }
 
-        // Invalid credentials
         System.out.println("Invalid username or password");
         disconnect();
         return 0;
@@ -43,8 +42,6 @@ public class Login extends DaoImpl {
             e.printStackTrace();
             throw e;
         }
-
-        // No such user found
         return false;
     }
 }
