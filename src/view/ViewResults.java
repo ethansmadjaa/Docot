@@ -77,69 +77,82 @@ public class ViewResults {
         cards.setLayout(new BoxLayout(cards, BoxLayout.Y_AXIS));
         cards.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        for (RendezVous rdv : listRdv) {
+        if (listRdv != null) {
+            for (RendezVous rdv : listRdv) {
 
-            JPanel card = new JPanel();
-            card.setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
+                JPanel card = new JPanel();
+                card.setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
 
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.insets = new Insets(5, 5, 5, 5);
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.weightx = 1;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                gbc.insets = new Insets(5, 5, 5, 5);
 
-            card.add(createLabel("Date: ", rdv.getDate().toString()), gbc);
-            card.add(createLabel("Heure: ", rdv.getHeure().toString()), gbc);
-            card.add(createLabel("Status: ", rdv.getStatus()), gbc);
-            card.add(createLabel("Infos du patient:\n ", rdv.getPatientInfo()), gbc);
-            card.add(createLabel("Lieu: ", docteur.getLieu()), gbc);
+                card.add(createLabel("Date: ", rdv.getDate().toString()), gbc);
+                card.add(createLabel("Heure: ", rdv.getHeure().toString()), gbc);
+                card.add(createLabel("Status: ", rdv.getStatus()), gbc);
+                card.add(createLabel("Infos du patient:\n ", rdv.getPatientInfo()), gbc);
+                card.add(createLabel("Lieu: ", docteur.getLieu()), gbc);
 
-            card.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10),
-                    BorderFactory.createLineBorder(Color.BLACK)
-            ));
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                        BorderFactory.createLineBorder(Color.BLACK)
+                ));
 
-            Patient patient = new Patient(rdv.getPatientId());
+                Patient patient = new Patient(rdv.getPatientId());
 
-            JButton cancelButton = new JButton("Annuler le Rendez-Vous avec Mr. " + patient.getNom());
+                JButton cancelButton = new JButton("Annuler le Rendez-Vous avec Mr. " + patient.getNom());
 
-            cancelButton.addActionListener(e -> {
-                int userChoice = JOptionPane.showConfirmDialog(
-                        cards,
-                        "Confirmer l'annulation du RDV avec Mr. "
-                                + patient.getNom()
-                                + "\n pour le "
-                                + rdv.getDate() + ".",
-                        "Annulation d'un RDV",
-                        JOptionPane.YES_NO_OPTION);
+                cancelButton.addActionListener(e -> {
+                    int userChoice = JOptionPane.showConfirmDialog(
+                            cards,
+                            "Confirmer l'annulation du RDV avec Mr. "
+                                    + patient.getNom()
+                                    + "\n pour le "
+                                    + rdv.getDate() + ".",
+                            "Annulation d'un RDV",
+                            JOptionPane.YES_NO_OPTION);
 
-                if (userChoice == JOptionPane.YES_OPTION) {
-                    try {
-                        if (RdvController.cancelRdv(rdv.getRendezVousID())) {
-                            JOptionPane.showMessageDialog(
-                                    cards,
-                                    "Rendez vous annulé avec Succès !",
-                                    "Confirmation",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                    if (userChoice == JOptionPane.YES_OPTION) {
+                        try {
+                            if (RdvController.cancelRdv(rdv.getRendezVousID())) {
+                                JOptionPane.showMessageDialog(
+                                        cards,
+                                        "Rendez vous annulé avec Succès !",
+                                        "Confirmation",
+                                        JOptionPane.INFORMATION_MESSAGE);
 
-                            MainMenuDocteur.initializeDoctorWindow(Objects.requireNonNull(getCurrentFrame()), docteur);
+                                MainMenuDocteur.initializeDoctorWindow(Objects.requireNonNull(getCurrentFrame()), docteur);
+                            }
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            throw new RuntimeException(ex);
                         }
-                    } catch (SQLException | ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
                     }
-                }
-            });
+                });
 
-            card.add(cancelButton, gbc);
+                card.add(cancelButton, gbc);
 
-            JPanel wrapper = new JPanel(new BorderLayout());
-            wrapper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-            wrapper.add(card);
-            cards.add(wrapper);
+                JPanel wrapper = new JPanel(new BorderLayout());
+                wrapper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                wrapper.add(card);
+                cards.add(wrapper);
+            }
+
+            scrollPane.setViewportView(cards);
+            scrollPane.getViewport().setBackground(Color.WHITE);
+
         }
+        else{
+            JLabel noRdvLabel = new JLabel("Aucun rendez-vous trouvé.");
+            noRdvLabel.setForeground(Color.RED);
+            noRdvLabel.setFont(new Font("Centhury Gothic", Font.BOLD, 20));
+            noRdvLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            cards.add(noRdvLabel);
 
-        scrollPane.setViewportView(cards);
-        scrollPane.getViewport().setBackground(Color.WHITE);
+            scrollPane.setViewportView(cards);
+            scrollPane.getViewport().setBackground(Color.WHITE);
+        }
     }
 
     public static void searchRdvPat(JScrollPane scrollPane, Patient patient) throws SQLException, ClassNotFoundException {
@@ -150,65 +163,79 @@ public class ViewResults {
         cards.setLayout(new BoxLayout(cards, BoxLayout.Y_AXIS));
         cards.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        for (RendezVous rdv : listRdv) {
+        if (listRdv != null) {
 
-            JPanel card = new JPanel();
-            card.setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
+            for (RendezVous rdv : listRdv) {
 
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.insets = new Insets(5, 5, 5, 5);
+                JPanel card = new JPanel();
+                card.setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
 
-            card.add(createLabel("Date: ", rdv.getDate().toString()), gbc);
-            card.add(createLabel("Heure: ", rdv.getHeure().toString()), gbc);
-            card.add(createLabel("Status: ", rdv.getStatus()), gbc);
-            card.add(createLabel("Infos du medecin:\n ", rdv.getDoctorInfo()), gbc);
-            card.add(createLabel("Lieu: ", rdv.getLieu()), gbc);
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.weightx = 1;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                gbc.insets = new Insets(5, 5, 5, 5);
 
-            card.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10),
-                    BorderFactory.createLineBorder(Color.BLACK)
-            ));
+                card.add(createLabel("Date: ", rdv.getDate().toString()), gbc);
+                card.add(createLabel("Heure: ", rdv.getHeure().toString()), gbc);
+                card.add(createLabel("Status: ", rdv.getStatus()), gbc);
+                card.add(createLabel("Infos du medecin:\n ", rdv.getDoctorInfo()), gbc);
+                card.add(createLabel("Lieu: ", rdv.getLieu()), gbc);
 
-            Docteur docteur = new Docteur(rdv.getDocId());
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                        BorderFactory.createLineBorder(Color.BLACK)
+                ));
 
-            JButton cancelButton = new JButton("Annuler le Rendez-Vous avec le Dr. " + docteur.getNom());
+                Docteur docteur = new Docteur(rdv.getDocId());
 
-            cancelButton.addActionListener(e -> {
-                int userChoice = JOptionPane.showConfirmDialog(
-                        cards,
-                        "Confirmer l'annulation du RDV avec le Dr. "
-                                + docteur.getNom()
-                                + "\n pour le "
-                                + rdv.getDate() + ".",
-                        "Annulation d'un RDV",
-                        JOptionPane.YES_NO_OPTION);
+                JButton cancelButton = new JButton("Annuler le Rendez-Vous avec le Dr. " + docteur.getNom());
 
-                if (userChoice == JOptionPane.YES_OPTION) {
-                    try {
-                        if (RdvController.cancelRdv(rdv.getRendezVousID())) {
-                            JOptionPane.showMessageDialog(
-                                    cards,
-                                    "Rendez vous annulé avec Succès !",
-                                    "Confirmation",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            MainMenuPatient.initializePatientWindow(getCurrentFrame(), patient);
+                cancelButton.addActionListener(e -> {
+                    int userChoice = JOptionPane.showConfirmDialog(
+                            cards,
+                            "Confirmer l'annulation du RDV avec le Dr. "
+                                    + docteur.getNom()
+                                    + "\n pour le "
+                                    + rdv.getDate() + ".",
+                            "Annulation d'un RDV",
+                            JOptionPane.YES_NO_OPTION);
+
+                    if (userChoice == JOptionPane.YES_OPTION) {
+                        try {
+                            if (RdvController.cancelRdv(rdv.getRendezVousID())) {
+                                JOptionPane.showMessageDialog(
+                                        cards,
+                                        "Rendez vous annulé avec Succès !",
+                                        "Confirmation",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                MainMenuPatient.initializePatientWindow(getCurrentFrame(), patient);
+                            }
+                        } catch (SQLException | ClassNotFoundException ex) {
+                            throw new RuntimeException(ex);
                         }
-                    } catch (SQLException | ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
                     }
-                }
-            });
-            card.add(cancelButton, gbc);
-            JPanel wrapper = new JPanel(new BorderLayout());
-            wrapper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-            wrapper.add(card);
-            cards.add(wrapper);
+                });
+                card.add(cancelButton, gbc);
+                JPanel wrapper = new JPanel(new BorderLayout());
+                wrapper.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                wrapper.add(card);
+                cards.add(wrapper);
+            }
+            scrollPane.setViewportView(cards);
+            scrollPane.getViewport().setBackground(Color.WHITE);
+
         }
+        else{
+        JLabel noRdvLabel = new JLabel("Aucun rendez-vous trouvé.");
+        noRdvLabel.setForeground(Color.RED);
+        noRdvLabel.setFont(new Font("Centhury Gothic", Font.BOLD, 20));
+        noRdvLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        cards.add(noRdvLabel);
+
         scrollPane.setViewportView(cards);
         scrollPane.getViewport().setBackground(Color.WHITE);
+        }
     }
 
     public static JFrame getCurrentFrame() {
