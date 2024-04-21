@@ -37,13 +37,10 @@ Pour commencer avec le projet ECE RDV Médical, suivez ces étapes :
 
 2. Assurez-vous que Java JDK est installé et correctement configuré sur votre machine.
 
-3. Importez les dépendances nécessaires à votre projet, par exemple, MySQL Connector pour la gestion de la base de 
-données et JFreeChart pour la génération de rapports sous forme de graphiques.
-
-4. Configurez la connexion à la base de données en modifiant le fichier de 
+3. Configurez la connexion à la base de données en modifiant le fichier de 
 configuration avec vos propres paramètres de connexion.
 
-5. ##### Aller dans Project Structure > Librairies, appuyer le l'icône +, "From Maven" , et ajouter ces deux bibliothèques: 
+4. ##### Aller dans Project Structure > Librairies, appuyer le l'icône +, "From Maven" , et ajouter ces deux bibliothèques: 
 ### JCalendar
 ```sh
 io.github.lzh0379.jdatepicker
